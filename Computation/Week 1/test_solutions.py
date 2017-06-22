@@ -93,5 +93,52 @@ def test_complex_str(set_up_complex_nums):
     assert str(number_1) == "1+2i"
     assert str(number_1.conjugate()) == "1-2i"
 
+def test_conjugate(set_up_complex_nums):
+    number_1, number_2, number_3, number_4 = set_up_complex_nums
+    assert number_1.conjugate() == soln.ComplexNumber(1, -2)
+
+def test_div(set_up_complex_nums):
+    number_1, number_2, number_3, number_4 = set_up_complex_nums
+    assert number_1/number_2 == soln.ComplexNumber(0.3,0.1)
+
+    with pytest.raises(Exception) as excinfo:
+        number_1 / number_4
+        assert excinfo.typename == 'ValueError'
+        assert excinfo.value.args[0] == "Cannot divide by zero"
+    pass
 
 # Problem 4: Write test cases for the Set game.
+
+def test_load():
+    with pytest.raises(Exception) as excinfo:
+        soln.load("abc")
+        assert excinfo.typename == "TypeError"
+        assert excinfo.value.args[0] == "Wrong File Type"
+
+def test_parse():
+    with pytest.raises(Exception) as excinfo:
+        soln.parse("hand1.txt")
+        assert excinfo.typename == "ValueError"
+        assert excinfo.value.args[0] == "Too Few Cards"
+
+    with pytest.raises(Exception) as excinfo:
+        soln.parse("hand2.txt")
+        assert excinfo.typename == "ValueError"
+        assert excinfo.value.args[0] == "Too Many Cards"
+
+    with pytest.raises(Exception) as excinfo:
+        soln.parse("hand3.txt")
+        assert excinfo.typename == "ValueError"
+        assert excinfo.value.args[0] == "Wrong Cards"
+
+    with pytest.raises(Exception) as excinfo:
+        soln.parse("hand4.txt")
+        assert excinfo.typename == "ValueError"
+        assert excinfo.value.args[0] == "Duplicate Cards"
+
+'''
+Here we put a hacky fix for the final test, because it refused to locate
+the directory. Note that hand5 is the original hand presented in the question
+'''
+def test_solve():
+    assert soln.solver("C:/Users/Kenneth/Documents/OSM Lab 2017/Computation/hand6.txt") == 6

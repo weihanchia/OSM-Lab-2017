@@ -1,3 +1,5 @@
+#Script to Run Box Game
+
 import sys
 import random
 import box as box
@@ -19,13 +21,13 @@ while (gameover == 0):
     if box.isvalid(roll,numbers):
         print("Numbers left: " + str(numbers))
         print("Roll: " + str(roll))
-        elim = input("Numbers to eliminate")
+        elim = input("Numbers to eliminate: ")
         while box.parse_input(elim,numbers) == []:
             print("Invalid Input")
-            elim = input("Numbers to eliminate")
-        while sum(box.parse_input(elim,numbers))!=roll:
+            elim = input("Numbers to eliminate: ")
+        while sum(box.parse_input(elim,numbers)) != roll:
             print("Invalid Input")
-            elim = input("Numbers to eliminate")    
+            elim = input("Numbers to eliminate: ")
         remove = box.parse_input(elim, numbers)
         numbers = [x for x in numbers if x not in remove]
     else:
