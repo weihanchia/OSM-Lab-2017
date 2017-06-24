@@ -1,0 +1,100 @@
+\documentclass{article}
+
+%%% SOME USEFUL PACKAGES %%%
+\usepackage[english]{babel} % hyphenation
+\usepackage[margin=1.5cm]{geometry} % margins
+\usepackage{graphicx} % support for graphics
+\usepackage{amsmath} % support for math­e­mat­i­cal typesetting
+\usepackage{amssymb} % math­e­mat­i­cal symbols
+\usepackage{color} % support for colors
+\usepackage{mathtools} % more math­e­mat­i­cal type­set­ting
+\usepackage{amsthm} % for defining theorem-like environments
+\usepackage{enumerate} % change appearance of numbered lists
+\usepackage{framed} % textboxes
+\usepackage[format=plain,labelfont=bf,up]{caption} % cus­tomise cap­tions for fig­ures and ta­bles
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=blue,linktoc=all, citecolor=black]{hyperref} % hyperlinks
+\usepackage{setspace}
+\usepackage{verbatim}
+
+%%% CUSTOM COMMANDS %%%
+\def\ci{\perp\!\!\!\perp} % statistical independence symbol
+\newcommand{\ind}{1\hspace{-2.1mm}{1}} % indicator function
+\newcommand{\rl}{\mathbb{R}} % real numbers
+\newcommand{\ex}[1]{\mathbb{E} \left\{ #1 \right\}} % expectation operator
+\newcommand{\pr}[1]{\mathbb{P} \left\{ #1 \right\}} % probability
+\newcommand{\var}[1]{\mathbb{V}\text{ar} \left\{ #1 \right\}} % variance
+\newcommand{\cov}[1]{\mathbb{C}{ov} \left\{ #1 \right\}} % covariance
+\newcommand{\corr}[1]{\mathbb{C}{orr} \left\{ #1 \right\}} % correlation
+
+\begin{document}
+	\title{OSM Lab 2017: Econ Pset 1}
+	\author{Wei Han Chia}
+	\date{Due: 26 June 2017}
+	\maketitle
+	
+	\section*{Coding and Solving OG Model with Exogenous Labor}
+	To solve the problems in this section, we code up a class of 3 period exogenous labor models in python. This module can be found in the following github repository\footnote{\hyperlink{https://github.com/weihanchia/OSM-Lab-2017}{https://github.com/weihanchia/OSM-Lab-2017}}
+	\subsection*{Problem 1}
+	We use the following calibration provided in the test:
+	\begin{figure}[!h]
+		\centering
+		\caption{Calibrated Values}
+		\begin{tabular}{c | c}
+			Period of Life & 20 \\ 
+			Period Discount Factor ($\beta$) & 0.442 \\
+			Period Depreciation Rate ($\delta$) & 0.6415 \\
+			Relative Risk Aversion ($\sigma$) &  3 \\
+			TFP ($A$) & 1 \\
+			Capital Share of Income ($\alpha$) & 0.3
+		\end{tabular}
+	\end{figure}
+	
+	From our HH FOC's, and the firm FOC's, we can derive two functions in two unknowns at the steady state $(\bar{b_2}, \bar{b_3}) = \Gamma$. 
+	\begin{align*}
+	(\bar{w}(\Gamma) - \bar{b_2})^{-\sigma} &= \beta((1 + \bar{r}(\Gamma))(\bar{w}(\Gamma)) + (1 + \bar{r}(\Gamma))\bar{b_2} - \bar{b_3})^{-\sigma} \\
+	(\bar{w}(\Gamma) + (1 + \bar{r}(\Gamma))\bar{b_2} - \bar{b_3})^{-\sigma} &= \beta (1 + \bar{r})(0.2\bar{w}(\Gamma) + (1 + \bar{r}(\Gamma))\bar{b_3})^{-\sigma}
+	\end{align*}
+	
+	We use the opt.root function from package scipy.optimize in python to solve for the steady state.
+	\begin{figure}[!h]
+		\centering
+		\caption{Steady State Values}
+		\begin{tabular}{c | c}
+			$(\bar{b_2}, \bar{b_3})$ & (0.0193, 0.0584) \\
+			$(\bar{c_1}, \bar{c_2}, \bar{c_3})$ & (0.182, 0.209,0.241) \\
+			$\bar{w}$ & 0.202 \\
+			$\bar{r}$ & 2.433 
+		\end{tabular}
+	\end{figure}
+	
+	\newpage
+	\subsection*{Problem 2}
+	Now we are interested in seeing how our steady state values change when $\beta$ is increased to 0.55. Solving for the new steady state gives us the results we expect. Firstly the savings in each period increases, because of a greater patience leading to more money being saved. This corresponding increase in the capital stock leads to a higher steady state wage from our Firm FOC. We also see that we have a lowered steady state rental wage because of the increased demand for savings. Finally, because of increased wages and savings, we see an increase in overall steady state consumption across all stages of life.
+	
+	\begin{figure}[!h]
+		\centering
+		\caption{Steady State Values with $\beta = 0..55$}
+		\begin{tabular}{c | c}
+			$(\bar{b_2}, \bar{b_3})$ & (0.0282, 0.0769) \\
+			$(\bar{c_1}, \bar{c_2}, \bar{c_3})$ & (0.196, 0.229, 0.267) \\
+			$\bar{w}$ & 0.224 \\
+			$\bar{r}$ & 1.89 			
+		\end{tabular}
+	\end{figure}
+	
+	\subsection*{Problem 3}
+	Now given the steady state values and an initial value, we can use the same Euler Equations to solve for the transition path of capital. We implement this by first guessing a path for capital $K'_t$, computing $r$ and $w$ from the firm's FOC's, and backing out savings $K''_t$). We then compare the difference in savings and the guessed capital path, and update according to the following equation.
+	\[ K'_{t+1} = \xi K'_t + (1 - \xi) K''_t \]
+	
+	We iterate until the paths lie within $10^{-12}$ of each other.
+	
+	\newpage
+	\subsection*{Problem 4}
+	We perturb the model by initializing $(0.8 \bar{b_2}, 1.1 \bar{b_3})$. The following transition path for capital is shown below. From the graph, we note that capital returns to its steady state values by T = 10.
+	
+	\begin{figure}[!h]
+		\centering
+		\caption{Capital Transition Path}
+		\includegraphics[width = \textwidth]{ktrans}
+	\end{figure} 
+\end{document}

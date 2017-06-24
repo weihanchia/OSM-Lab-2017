@@ -123,10 +123,11 @@ class olg3pernol(object):
 
         while error > epsilon and it < maxiter:
             #Solve the time path iteration
-            for t in range(0,T-2):
+            tempk = kvec[0:3]
+            bt2 = bres[0,0]
+            bres[1,1] = self.policy2per(bt2,bguess[1],tempk)
+            for t in range(0,T-3):
                 tempk = kvec[t:t+3]
-                bt2 = bres[t,0]
-                bres[t+1,1] = self.policy2per(bt2,bguess[1],tempk)
                 bres[t+1,0] = self.policymulti(bguess, tempk)[0]
                 if t < T-2:
                     bres[t+2,1] = self.policymulti(bguess, tempk)[1]

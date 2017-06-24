@@ -146,6 +146,73 @@
 	So in this case, despite the potential for a risk free investment in local currency, the US investor would have a higher expected return by investing in CHF. Similarly, a Swiss investor would have a higher expected return by investing in USD.
 	
 	\section*{Problem 6}
+	\subsection*{(a)}
+	Consider the pareto distribution with scale factor 1, $\alpha = {3}{2}$. Then, the pdf of this distribution is $f(x) = \frac{(3/2)^{3/2}}{x^{5/2}}$. We also know that the mean of this distribution is 3, and the variance is $\infty$.
+	
+	This is an example of a fat tailed distribution.
+	
+	\subsection*{(b)}
+	
+	
+	\subsection*{(c)}
+	We want a set of random variables such that $P(X > Y)P(Y > Z)P(X > Z) > 0$, but $\mathbf{E}[X] = \mathbf{E}[Y] = \mathbf{E}[Z] = 0$. Consider $X,Y,Z$ independently distributed $\sim N(0,1)$. Then we have $\mathbf{E}[X] = \mathbf{E}[Y] = \mathbf{E}[Z] = 0$. 
+	
+	Further note that $P(X > Y) = P(X - Y > 0) = \frac{1}{2}$. This holds for all three probabilities, such that $P(X > Y)P(Y > Z)P(X > Z) = \frac{1}{8} > 0$. 
+	
+	\section*{Problem 7}
+	Let the random variables X and Z be independent with $X \sim N(0,1)$, $P(Z=1) = P(Z=-1) = \frac{1}{2}$. Define $Y = XZ$. 
+	
+	\subsection*{(a)}
+	Lets consider the cdf of $Y$. 
+	
+	\begin{align*}
+	P(Y < y) &= P(XZ < y) = P(X < y | Z = 1).P(Z=1) + P(- X > - y | Z = -1).P(Z = -1) \\
+	&= P(X < y) \quad \text{Since the normal distribution is symmetric}
+	\end{align*}
+	
+	So $Y \sim N(0,1)$ as well.
+	
+	\subsection*{(b)}
+	Consider $|Y|$.
+	\begin{align*}
+	|Y| = |XZ| = |X||Z|= |X|
+	\end{align*}
+	So it follows that $P(|X| = |Y|) = P(|X| = |X|) = 1$.
+	
+	\subsection*{(c)}
+	Consider $P(Y < y \cap X < x) = 0.5 P(X < -1) \neq P(Y < -1) P(X < -1)$. So the two events are not independent.
+	
+	\subsection*{(d)}
+	\begin{align*}
+	Cov(X,Y) &= \mathbf{E}[XY] - \mathbf{E}[X] \mathbf{E}[Y] \\
+	&= \mathbf{E}[X^2 Z]  = \mathbf{E}[X^2] \mathbf{E}[Z] \\
+	&= 0
+	\end{align*} 
+	So the two events have 0 covariance.
+	
+	\subsection*{(e)}
+	Combining the results from (c) and (d) show us a pair of normally distributed random variables which have 0 covariance, but are not independent.
+	
+	Note that this statement only works for a pair of \textbf{jointly} normally distributed random variables.
+	
+	\section*{Problem 8}
+	Consider $m = \min \{ X_1, ... X_n \}, M = \max \{ X_1,...,X_n\}$. Where each $X_i \sim Uniform(0,1)$. We first derive the cdf, then the pdf through differentiation, and finally the expected values of $m$ and $M$.
+	
+	\begin{align*}
+	F_m(x) &= P(m \leq x) = 1 - (1- P(X < x))^n \\
+	&= 1 - (1- x)^n\\
+	f_m(x) &= n(1 - x)^{n-1}	\\
+	\mathbf{E}(m) &= n \int_{0}^{1} x(1-x)^{n-1} dx \\
+	&= \frac{1}{n+1} \quad \text{The integral is a beta function with parameters 2, n}
+	\end{align*}
+	
+	\begin{align*}
+	F_M(x) &= P(M \leq x) = (P(X, x))^n \\
+	&= x^n \\
+	f_M(x) &= nx^{n-1} \\
+	\mathbf{E}(M) &= n \int_{0}^{1} x^{n} dx \\
+	&= \frac{n}{n+1}
+	\end{align*}
 	
 	\section*{Problem 9}
 	We want to simulate a dynamic economy with 2 states,and a probability of shock of $0.5$. It is clear that given a fixed number of periods $n$, the distribution of good states ($X$) is given by a binomial distribution $B(n,0.5)$.  
@@ -161,4 +228,13 @@
 	P(|Y- 0.5 |\geq 0.005) \leq \frac{1}{4(0.005)^2 n}
 	\end{align*}
 	In order for $P(|Y-0.5| \leq 0.005) \geq 0.99$, we need $P(|Y - 0.5| \geq 0.005) \leq 0.01$, i.e. $\frac{1}{4(0.005)^2 n} \leq 0.01$. Solving this inequality gives $n \geq 1000000$. 
+	
+	\section*{Problem 10}
+	We know that $\mathbf{E}[X] < 0$ and $\theta \neq 0$ such that $\mathbf{E}[e^{\theta x}] = 1$. We want to prove that $\theta > 0$. 
+	
+	\begin{proof}
+	For contradiction, assume that $\theta < 0$. Now we know that $e^{\theta x}$ is a convex function, so $e^{\theta \mathbf{E}[X]} \leq \mathbf{E}[e^{\theta x}] =1$. However, since we know that $\mathbf{E}[X] < 0$, and $\theta < 0$, it follows that $\theta \mathbf{E}[X] > 0$. Since $e$ is monotone increasing, and $e^0 = 1$, it must be that $e^{\theta \mathbf{E}[X]} > 1$, a contradiction. 
+	
+	Therefore $\theta > 0$.  
+	\end{proof}
 \end{document}
