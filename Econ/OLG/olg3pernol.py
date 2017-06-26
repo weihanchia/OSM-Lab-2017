@@ -57,8 +57,8 @@ class olg3pernol(object):
         res = np.ones((2))
         r2 = self.get_r(Kvec[1])
         r3 = self.get_r(Kvec[2])
-        res[0] = self.MUC(c[1]) - self.beta*(1 + r3)*self.MUC(c[2])
-        res[1] = self.MUC(c[0]) - self.beta*(1 + r2)*self.MUC(c[1])
+        res[1] = self.MUC(c[1]) - self.beta*(1 + r3)*self.MUC(c[2])
+        res[0] = self.MUC(c[0]) - self.beta*(1 + r2)*self.MUC(c[1])
         return res
 
     def eulererror3(self, b2, b1, Kvec):
@@ -126,15 +126,14 @@ class olg3pernol(object):
             tempk = kvec[0:3]
             bt2 = bres[0,0]
             bres[1,1] = self.policy2per(bt2,bguess[1],tempk)
-            for t in range(0,T-3):
+            for t in range(0,T-2):
                 tempk = kvec[t:t+3]
                 bres[t+1,0] = self.policymulti(bguess, tempk)[0]
-                if t < T-2:
-                    bres[t+2,1] = self.policymulti(bguess, tempk)[1]
+                bres[t+2,1] = self.policymulti(bguess, tempk)[1]
             knew = bres.sum(axis=1)
-            error = np.linalg.norm(abs(knew - kvec))
+            error = np.linalg.norm(knew - kvec)
             kvec = chi* kvec + (1- chi)*knew
-            print("Iternation number: " + str(it) + " Error: " +str(error))
+            print("Iteration number: " + str(it) + " Error: " +str(error))
             it += 1
 
         return bres
