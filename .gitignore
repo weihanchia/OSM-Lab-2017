@@ -32,4 +32,4 @@ dist/*
 *.dta
 *.dat
 *.zip
-*.ipynb_checkpoints*lastfailed
+*.ipynb_checkpoints*.cache/
