@@ -1,0 +1,495 @@
+\documentclass{article}
+
+%%% SOME USEFUL PACKAGES %%%
+\usepackage[english]{babel} % hyphenation
+\usepackage[margin=1.5cm]{geometry} % margins
+\usepackage{graphicx} % support for graphics
+\usepackage{amsmath} % support for math­e­mat­i­cal typesetting
+\usepackage{amssymb} % math­e­mat­i­cal symbols
+\usepackage{color} % support for colors
+\usepackage{mathtools} % more math­e­mat­i­cal type­set­ting
+\usepackage{amsthm} % for defining theorem-like environments
+\usepackage{enumerate} % change appearance of numbered lists
+\usepackage{framed} % textboxes
+\usepackage[format=plain,labelfont=bf,up]{caption} % cus­tomise cap­tions for fig­ures and ta­bles
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=blue,linktoc=all, citecolor=black]{hyperref} % hyperlinks
+\usepackage{setspace}
+\usepackage{verbatim}
+
+%%% CUSTOM COMMANDS %%%
+\def\ci{\perp\!\!\!\perp} % statistical independence symbol
+\newcommand{\ind}{1\hspace{-2.1mm}{1}} % indicator function
+\newcommand{\rl}{\mathbb{R}} % real numbers
+\newcommand{\ex}[1]{\mathbb{E} \left\{ #1 \right\}} % expectation operator
+\newcommand{\pr}[1]{\mathbb{P} \left\{ #1 \right\}} % probability
+\newcommand{\var}[1]{\mathbb{V}\text{ar} \left\{ #1 \right\}} % variance
+\newcommand{\cov}[1]{\mathbb{C}{ov} \left\{ #1 \right\}} % covariance
+\newcommand{\corr}[1]{\mathbb{C}{orr} \left\{ #1 \right\}} % correlation
+\newcommand{\inprod}[1]{\langle #1 \rangle}
+
+\begin{document}
+	\title{OSM Lab 2017: Math Pset 2}
+	\author{Wei Han Chia}
+	\date{Due: 5 July 2017}
+	\maketitle
+	
+	\section*{Problems from the Book}
+	\subsection*{3.1}
+	We can derive each of the identities simply by using the properties of inner products in a real Inner Product Space (IPS).
+	(i) Polarization identity.
+	\begin{align*}
+	\frac{1}{4}(\Vert \mathbf{x} + \mathbf{y} \Vert^2 - \Vert \mathbf{x} - \mathbf{y} \Vert^2) &= \frac{1}{4}[\inprod{\mathbf{x} + \mathbf{y}, \mathbf{x} + \mathbf{y}} - \inprod{\mathbf{x} - \mathbf{y}, \mathbf{x} - \mathbf{y}}] \\
+	&= \frac{1}{4}[\inprod{\mathbf{x}, \mathbf{x}} + 2 \inprod{\mathbf{x}, \mathbf{y}} + \inprod{\mathbf{y}, \mathbf{y}} - \inprod{\mathbf{x}, \mathbf{x}} + 2\inprod{ \mathbf{x}, \mathbf{y}} - \inprod{\mathbf{y}, \mathbf{y}}] \\
+	&= \inprod{\mathbf{x}, \mathbf{y}}
+	\end{align*}
+	
+	(ii) Parallelogram identity.
+	\begin{align*}
+	\frac{1}{2}(\Vert \mathbf{x} + \mathbf{y} \Vert^2 + \Vert \mathbf{x} - \mathbf{y} \Vert^2) &= \frac{1}{2}[\inprod{\mathbf{x} + \mathbf{y}, \mathbf{x} + \mathbf{y}} + \inprod{\mathbf{x} - \mathbf{y}, \mathbf{x} - \mathbf{y}}] \\
+	&= \frac{1}{2}[\inprod{\mathbf{x}, \mathbf{x}> + 2 <\mathbf{x}, \mathbf{y}} + \inprod{\mathbf{y}, \mathbf{y}} + \inprod{\mathbf{x}, \mathbf{x}} - 2\inprod{\mathbf{x}, \mathbf{y}} + \inprod{\mathbf{y}, \mathbf{y}}]\\
+	&= \inprod{\mathbf{x}, \mathbf{x}} + \inprod{\mathbf{y}, \mathbf{y}} \\
+	&= \Vert \mathbf{x} \Vert^2 + \Vert \mathbf{y} \Vert^2
+	\end{align*}
+	
+	\subsection*{3.2}
+	We perform a similar expansion as in 3.1, accounting for conjugates since we are in complex IPS.	
+	\begin{align*}
+	\frac{1}{4}(\Vert \mathbf{x} + \mathbf{y} \Vert^2 - \Vert \mathbf{x} - \mathbf{y} \Vert^2 + i \Vert \mathbf{x} - i \mathbf{y} \Vert^2 - i \Vert \mathbf{x} + i \mathbf{y} \Vert ^2) &= \frac{1}{4} [\inprod{\mathbf{x} + \mathbf{y}, \mathbf{x} + \mathbf{y}} - \inprod{\mathbf{x} - \mathbf{y}, \mathbf{x} - \mathbf{y}} + i \inprod{\mathbf{x} - i\mathbf{y}, \mathbf{x} - i \mathbf{y}} - i \inprod{\mathbf{x} + i \mathbf{y}, \mathbf{x} + i \mathbf{y}}]\\
+	&= \frac{1}{4}[\overline{\inprod{\mathbf{x}, \mathbf{x}}} + \overline{\inprod{\mathbf{x}, \mathbf{y}}} + \inprod{\mathbf{x}, \mathbf{y}} + \overline{\inprod{\mathbf{y}, \mathbf{y}}} - \overline{\inprod{\mathbf{x}, \mathbf{x}}} - \inprod{\mathbf{x}, \mathbf{y}} + \overline{\inprod{\mathbf{x}, \mathbf{y}}} - \overline{\inprod{\mathbf{y}, \mathbf{y}}} + \\ &i \overline{\inprod{\mathbf{x}, \mathbf{x}}} - \overline{\inprod{\mathbf{x}, \mathbf{y}}} + i \overline{\inprod{\mathbf{y}, \mathbf{y}}} + \inprod{\mathbf{x}, \mathbf{y}} - i \overline{\inprod{\mathbf{x}, \mathbf{x}}} - \overline{\inprod{\mathbf{x}, \mathbf{y}}} - i \overline{\inprod{\mathbf{y}, \mathbf{y}}} + \inprod{\mathbf{x}, \mathbf{y}}]\\
+	&= \inprod{\mathbf{x}, \mathbf{y}}
+	\end{align*}
+	
+	\subsection*{3.3}
+	We define the inner product on $\mathbb{R}[x]$ to be:
+	\[ \inprod{f,g} = \int_{0}^{1} f(x) g(x) dx \]
+	We can then compute the angle $\theta$ between any pair of vectors $x,y$ by $\theta = \arccos \frac{\inprod{x,y}}{\Vert x \Vert \Vert y \Vert}$
+	
+	(i)
+	\begin{align*}
+	\theta &= \arccos \frac{\int_{0}^{1} x x^5 dx}{\sqrt{\int_{0}^{1} x^2 dx} \sqrt{\int_{0}^{1} x^10 dx}}\\
+	&= \arccos \frac{1/7}{1/\sqrt{33}} \\
+	&= 0.608
+	\end{align*}
+	
+	(ii)
+	\begin{align*}
+	\theta &= \arccos \frac{\inprod{x^2, x^4}}{\Vert x^2 \Vert \Vert x^4 \Vert} \\
+	&= \arccos \frac{\int_{0}^{1} x^2 x^4 dx}{\sqrt{\int_{0}^{1} x^4 dx} \sqrt{\int_{0}^{1} x^8 dx}}\\
+	&= \arccos \frac{1/7}{1/\sqrt{45}} \\
+	&= 0.289
+	\end{align*}
+	
+	\subsection*{3.8}
+	Let $V$ be the IPS $C([-\pi, \pi];\mathbb{R})$ with inner product
+	\[\inprod{f,g} = \frac{1}{\pi} \int_{-\pi}^{\pi} f(t)g(t) dt \]
+	
+	(i) To show that S is an orthonormal set, we show that elements in S are all pairwise orthogonal, and have norm 1 (equivalently, the square of their norm is 1).
+	
+	\begin{align*}
+	\Vert \cos(t) \Vert^2 &= \frac{1}{\pi} \int_{-\pi}^{\pi} \cos^2(t) dt \\
+	&= \frac{1}{\pi} \int_{-\pi}^{\pi} \frac{1}{2} + \cos(2t)/2 dt \\
+	&= 1 \\
+	\Vert \sin(t) \Vert^2 &= \frac{1}{\pi} \int_{-\pi}^{\pi} \sin^2(t) dt \\
+	&= \frac{1}{\pi} \int_{-\pi}^{\pi} \frac{1}{2} - \cos(2t)/2 dt \\
+	&= 1 \\
+	\Vert \cos(2t) \Vert^2 &= \frac{1}{\pi} \int_{-\pi}^{\pi} \cos^2(2t)dt \\
+	&= \frac{1}{\pi} \int_{-\pi}^{\pi} \frac{1}{2} + \cos(4t)/2 dt \\
+	&= 1 \\
+	\Vert \sin(2t) \Vert^2 &= \frac{1}{\pi} \int_{-\pi}^{\pi} \sin^2(2t)dt\\
+	&= \frac{1}{\pi} \int_{-\pi}^{\pi} \frac{1}{2} - \cos(4t)/2 dt \\
+	&= 1 \\
+	\inprod{\cos(t), \sin(t)} &= \frac{1}{\pi} \int_{-\pi}^{\pi} \cos(t)\sin(t) dt \\
+	&= \frac{1}{\pi} \int_{-\pi}^{\pi} \frac{1}{2} \sin(2t) dt \\
+	&= 0 \\
+	\inprod{\cos(2t), \sin(2t)} &= \frac{1}{\pi} \int_{-\pi}^{\pi} \cos(2t)\sin(2t)dt \\
+	&= \frac{1}{\pi} \int_{-\pi}^{\pi} \frac{1}{2} \sin(4t) dt \\
+	&= 0 \\
+	\inprod{\cos(t), \cos(2t)} &= \frac{1}{\pi} \int_{-\pi}^{\pi} \cos(t) \cos(2t) dt \\
+	&= \frac{1}{\pi} \int_{-\pi}^{\pi}\frac{1}{2} (\cos(t) + \cos(3t)) dt \\
+	&= 0 \\
+	\inprod{\cos(t), \sin(2t)} &= \frac{1}{\pi} \int_{-\pi}^{\pi} \cos(t) \sin(2t) dt \\
+	&= \frac{1}{\pi} \int_{-\pi}^{\pi} \frac{1}{2} (\sin(t) + \sin(3t)) dt \\
+	&= 0 \\
+	\inprod{\sin(t), \cos(2t)} &= \frac{1}{\pi} \int_{-\pi}^{\pi} \sin(t) \cos(2t) dt \\
+	&= \frac{1}{\pi} \int_{-\pi}^{\pi} \frac{1}{2} (\sin(3t) - \sin(t)) dt \\
+	&= 0 \\
+	\inprod{\sin(t), \sin(2t)} &= \frac{1}{\pi} \int_{-\pi}^{\pi} \sin(t) \sin(2t) dt \\
+	&= \frac{1}{\pi} \int_{-\pi}^{\pi} \frac{1}{2} (\cos(t) - \cos(3t)) dt \\
+	&= 0
+	\end{align*}
+	
+	(ii)
+	\begin{align*}
+	\Vert t \Vert &= \sqrt{\frac{1}{\pi} \int_{-\pi}^{\pi} t^2 dt} \\
+	&= \sqrt{ \frac{1}{\pi} \frac{2 \pi^3}{3} } \\
+	&= \pi \sqrt{ \frac{2}{3}}
+	\end{align*}
+	
+	(iii)
+	\begin{align*}
+	\text{proj}_{\text{span} X}(\cos(3t)) = \sum_{x \in S} \inprod{x, \cos(3t)} \frac{x}{\Vert x \Vert^2} \\
+	&= 0
+	\end{align*}
+	We note that this is true since for every $x \in S$, the integral of the product of $x$ and $cos(3t)$ is equivalent to an integral of a symmetric function about 0, which will give us 0. 
+	
+	(iv) 
+	\begin{align*}
+	\text{proj}_{\text{span} X}(t) &= \sum_{x \in S} \inprod{x, \cos(3t)} \frac{x}{\Vert x \Vert^2} \\
+	&= \frac{1}{\pi}[\int_{-\pi}^{\pi} t \sin(2t) dt + \int_{-\pi}^{\pi} \sin(t) dt \\
+	\end{align*}
+	We note that the terms involving integration of $t cos(t)$ are equal to zero, since this is an odd function and we are integrating over a symmetric interval.
+	
+	Next, we want to integrate by parts to solve for the two other integrals. We get that $\int_{-\pi}^{\pi} t \sin(2t) = - \pi$ and $\int_{-\pi}^{\pi} t \sin(t) = 2\pi$. Now combining this with our result in (ii) yields
+	\begin{align*}
+	\text{proj}_{\text{span} X}(t) &= \sqrt{\frac{3}{2}}t  
+	\end{align*}
+	
+	\subsection*{3.9}
+	Consider the rotation matrix R. We will show that $\inprod{Rx, Ry} = \inprod{x,y}$. Let $x = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}, y = \begin{bmatrix} x_3 \\ x_4 \end{bmatrix}$.
+	\begin{align*}
+	\inprod{x,y} &= x_1 x_3 + x_2 x_4 \\
+	A &= \begin{bmatrix} \cos \theta & - \sin \theta \\ \sin \theta & \cos \theta \end{bmatrix} \\
+	Ax &= \begin{bmatrix} x_1 \cos \theta - x_2 \sin \theta \\ x_1 \sin \theta + x_2 \cos \theta \end{bmatrix} \\
+	Ay &= \begin{bmatrix} x_3 \cos \theta - x_4 \sin \theta \\ x_3 \sin \theta + x_4 \cos \theta \end{bmatrix}\\
+	\inprod{Ax, Ay} &= x_1 x_3 \cos^2 \theta - x_1 x_4 \sin\theta \cos\theta - x_2 x_3 \sin\theta \cos\theta + x_1 x_4 \sin^2 \theta + \\
+	&x_1 x_3 \sin^2 \theta + x_1 x_4 \cos^2 \theta + x_1 x_4 \sin\theta \cos \theta + x_2 x_3 \sin\theta \cos\theta \\
+	&= (x_1 x_3 + x_2 x_4)(\sin^2 \theta + \cos^2 \theta) \\
+	&= x_1 x_3 + x_2 x_4 = \inprod{x,y}
+	\end{align*}
+	
+	\subsection*{3.10}
+	We will use the definition that a matrix $A$ is orthonormal if $\inprod{Ax, Ay} = \inprod{x,y}$.
+	
+	(i) Assume $Q$ is orthonormal.
+	\begin{align*}
+	\inprod{Qx, Qy} &= \inprod{x,y} \\
+	&= \inprod{Q^H Q x, y} 
+	&= \inprod{x, Q Q^H y}
+	\end{align*}
+	This implies that $Q^HQ = QQ^H = I$. 
+	
+	Now assume $Q^H Q = Q Q^H = I$.
+	\begin{align*}
+	\inprod{Q x, Q y} &= \inprod{Q^H Q x, y} \\
+	&= \inprod{x,y}
+	\end{align*}
+	So Q is orthonormal.
+	
+	(ii) Since $Q$ is orthonormal, $\Vert Q \mathbf{x} \Vert^2 = \inprod{Q \mathbf{x},Q\mathbf{x}}  = \inprod{\mathbf{x}, \mathbf{x}} = \Vert \mathbf{x} \Vert^2$. Since norm is always non-negative, $\Vert Q \mathbf{x} \Vert = \Vert \mathbf{x} \Vert$.
+	
+	(iii) We know that $Q^{-1}$ is a matrix such that $Q Q^{-1} = I$. Now it is clear that $Q^{-1} = Q^H$ in (i), and so it follows that $Q^{-1}$ is also an orthonormal matrix, since we can switch the order of $Q$ and $Q^H$.
+	
+	(iv) From (i), we know that $Q^H Q = I$. We also know from definition of matrix multiplication, that each $i,j$ entry of $Q^H Q = \sum_{k=1}{n} q_{ki} q_{ji}$. Now this is clearly $\inprod{\mathbf{q}_i, \mathbf{q}_j}$. Since $Q^H Q$ is the identity matrix, it follows that for all $i \neq j$, $\inprod{\mathbf{q}_i , \mathbf{q}_j} = 0$ and $\inprod{\mathbf{q}_i, \mathbf{q}_i} = 1$, or that the columns of Q are orthonormal. 
+	
+	(v) Consider any orthogonal matrix $Q$.
+	\begin{align*}
+	1 = det(I) = det(Q^H Q) = det(Q^H) det(Q) = det(Q)^2 \\
+	\implies | det(Q) | = 1
+	\end{align*}
+	The converse is not true. Consider the following symmetric real matrix $A = \begin{bmatrix} 2 & 1 \\ 1 & 1 \end{bmatrix}$. Now clearly $A^2 \neq I$, but $det (A) = 1$. 
+	
+	\subsection*{3.11}
+	Lets consider a set of linearly dependent vectors, i.e. given $\{ \mathbf{v}_1,..., \mathbf{v}_n \}$, there exists $\mathbf{v}_j \in \text{span}(\mathbf{v}_1,..., \mathbf{v}_{j-1})$. Now our Gram-Schmidt orthonormalization process (GS) applied to $\mathbf{v}_1,...,\mathbf{v}_{j-1}$ yields an orthonormal-basis for the span of that set $\mathbf{q}_1,..., \mathbf{q}_{j-1}$ where $\mathbf{v}_j = \sum_{i=1}^{j-1} \alpha_i \mathbf{q}_i$. Now applying GS yields
+	\begin{align*}
+	\mathbf{q}_j &= \frac{\mathbf{v}_j - \sum_{i-1}^{j-1} \inprod{\mathbf{q}_i, \mathbf{v}_j} \mathbf{q}_i}{\Vert\mathbf{v}_j - \sum_{i-1}^{j-1} \inprod{\mathbf{q}_i, \mathbf{v}_j} \mathbf{q}_i \Vert } \\
+	&= \frac{\mathbf{v}_j - \sum_{i=1}^{j-1} \alpha_i \mathbf{q}_i}{\Vert \mathbf{v}_j - \sum_{i=1}^{j-1} \alpha_i \mathbf{q}_i \Vert}
+	\end{align*} 
+	However, we note that $\mathbf{v}_j - \sum_{i=1}^{j-1} \alpha_i \mathbf{q}_i = \mathbf{0}$, and so dividing by zero on the denominator will yield an error in the algorithm.
+	
+	\subsection*{3.16}
+	(i) Let $A \in M_{2\times2}$, $A = QR$. Now consider $D = \begin{bmatrix} -1 & 0  \\ 0 & 1 \end{bmatrix}$. Note that $DD = I$. Now $A = QDD^{-1}R$. Now note that $QD$ is still orthonormal, since $QDD^HQ^H = I$. And $D^{-1}R$ is also still upper triangular. Thus we have another QR decomposition for A.
+	\newline
+	\noindent(ii) Let $A$ have two QR decompositions with R having all positive diagonal elements. 
+	\begin{align*}
+	Q_1 R_1 = Q_2 R_2 \\
+	M= Q_2^{H} Q_1 = R_2 R_1^{-1} 
+	\end{align*}
+	
+	Now note that $M$ is orthonormal and upper triangular. It follows that $M$ must be diagonal. Further, since we know that $R_2$ and $R_1$ have all positive diagonal entries, it follows that all entries of $M$ must be positive as well. Finally, since $M$ is orthonormal, it follows that all the diagonal entries are 1, i.e. that $M = I$. Then, we have
+	\[ Q_2 = Q_1, R_2 = R_1 \]
+	So the QR decomposition with R havin gall positive diagonal elements is unique.
+	
+	\subsection*{3.17}
+	Let $A \in M_{m \times n}$ have rank $n \leq m$. Let $A = \hat{Q} \hat{R}$ be a reduce QR decomposition. We want to solve $A^H A \mathbf{x} = A^H \mathbf{b}$. 
+	
+	\begin{align*}
+	&A^H A \mathbf{x} = A^H \mathbf{b} \\
+	&\hat{R}^H \hat{Q}^H \hat{Q} \hat{R} \mathbf{x} = \hat{R}^H \hat{Q}^H \mathbf{b} \\
+	&\hat{R}^{-H} \hat{R}^H \hat{R} \mathbf{x} = \hat{R}^{-H} \hat{R}^H \hat{Q}^H \mathbf{b} \\
+	&\hat{R} \mathbf{x} = \hat{Q}^H \mathbf{b}
+	\end{align*}
+	
+	\subsection*{3.23}
+	Let $(V, \Vert. \Vert)$ be a normed linear space.
+	\begin{align*}
+	\Vert \mathbf{x} \vert &\leq \Vert \mathbf{x} - \mathbf{y} \Vert + \Vert \mathbf{y} \Vert \quad \text{Triangle Inequality} \\
+	\implies \Vert \mathbf{x} \Vert - \Vert \mathbf{y} \Vert &\leq \Vert \mathbf{x} - \mathbf{y} \Vert \\
+	\Vert \mathbf{y} \Vert &\leq \Vert \mathbf{y} - \mathbf{x} \Vert + \Vert \mathbf{x} \Vert \quad \text{Triangle Inequality} \\
+	\implies \Vert \mathbf{y} \Vert - \Vert \mathbf{x} \Vert &\leq \Vert \mathbf{x} - \mathbf{y} \Vert \\
+	\text{Combining the two yields }
+	&| \Vert \mathbf{x} \Vert - \Vert \mathbf{y} \Vert | \leq \Vert \mathbf{x} - \mathbf{y} \Vert
+	\end{align*}
+	
+	\subsection*{3.24}
+	Consider $C([a,b];\mathbb{F})$ be the space of all continuous functions from $[a,b] \subset \mathbb{R}$ to $\mathbb{F}$. In order to prove that each operation is a norm, we will prove the following 3 properties: 
+	\begin{align*}
+	&(1) \quad \Vert x \Vert \geq 0, \text{ and } \Vert x \Vert = 0 \iff x = \\
+	&(2) \quad \Vert \alpha x \Vert = |\alpha| \Vert x \Vert \\
+	&(3) \quad \Vert x + y \Vert \leq \Vert x \Vert + \Vert y \Vert
+	\end{align*} 
+	
+	(i) $ \Vert f \Vert_{L1} = \int_{a}^{b} | f(t) | dt$. 
+	\begin{align*}
+	&(1) \quad \text{Follows from the definition of $|.|$} \\
+	&(2) \quad \Vert af \Vert_{L1} = |a| \int_{a}^{b} |f(t)| dt = |a| \Vert f \Vert_{L1} \\
+	&(3) \quad \Vert f + g \Vert_{L1} = \int_{a}^{b} |f + g | dt \leq \int_{a}^{b} |f| + |g| dt = \Vert f \Vert_{L1} + \Vert g \Vert_{L1}
+	\end{align*}
+	
+	(ii) $\Vert f \Vert_{L2} = (\int_{a}^{b} |f(t)|^2 dt)^{1/2}$.
+	\begin{align*}
+	&(1) \quad \text{Once again since $|x| = 0 \iff x = 0$, this holds} \\
+	&(2) \quad \Vert af \Vert_{L2} = (|a|^2 \int_{a}^{b}|f(t)|^2 dt)^{1/2} = |a| (\int_{a}^{b} |f(x)|^2 dt)^{1/2} = |a| \Vert f \Vert_{L2} \\
+	&(3) \quad \Vert f + g \Vert_{L2} = (\int_{a}^{b} |f(t) + g(t)|^2 dt)^{1/2} = (\int_{a}^{b} |f(t)|^2 dt + \int_{a}^{b} |g(t)|^2 + \int_{a}^{b} 2|f(t)g(t)| dt)^{1/2} \\
+	& \quad \quad \leq (\int_{a}^{b} |f(t)|^2 dt)^{1/2} + (\int_{a}^{b} |f(t)|^2 dt)^{1/2} = \Vert f \Vert_{L2} + \Vert g \Vert_{L2}
+	\end{align*}
+	
+	(iii) $\Vert f \Vert_{L \infty} = \sup_{x \in [a,b]} |f(x)|$.
+	\begin{align*}
+	&(1) \quad \text{Once again since $|x| = 0 \iff x = 0$, this holds} \\
+	&(2) \quad \Vert af \Vert_{L\infty} = \sup_{x \in [a,b]} |a f(x)| = |a| \sup_{x \in [a,b]} |f(x)| = |a| \Vert f \Vert_{L\infty} \\
+	&(3) \quad \Vert f + g \Vert_{L\infty} = \sup_{x \in [a,b]}|f(x) + g(x)| \leq \sup_{x \in [a,b]} |f(x)| + \sum_{x \in [a,b]} |g(x)| = \Vert f \Vert_{L\infty} + \Vert g \Vert_{L\infty}
+	\end{align*}
+	
+	\subsection*{3.26}
+	Topological equivalence between two norms $\Vert. \Vert_a$ and $\Vert. \Vert_b$ is defined as $\exists m, M$, $0 < m \leq M$ such that
+	\[ m \Vert \mathbf{x} \Vert_a \leq \Vert \mathbf{x} \Vert_b \leq M \Vert \mathbf{x} \Vert_a \]
+	To show that this is an equivalence relation, we will show that it is (1) reflexive, (2) symmetric and (3) transitive.
+	\begin{align*}
+	&(1) \quad m = 1, M = 1 \text{ then } \Vert \mathbf{x} \Vert_a = \Vert \mathbf{x} \Vert_a = \Vert \mathbf{x} \Vert_a \\
+	&(2) \quad \text{Given m, M such that } m \Vert \mathbf{x} \Vert_a  \leq \Vert \mathbf{x} \Vert_b \leq M \Vert \mathbf{x} \Vert_a \\
+	& \quad \quad \text{Consider 1/M $<$ 1/m, } 1/M \Vert \mathbf{x} \Vert_b \leq \Vert \mathbf{x} \Vert_a \leq 1/m \Vert \mathbf{x} \Vert_b \\
+	&(3) \quad a \sim b, b \sim c \text{ Consider $m_a m_b < M_a M_b$. Then } \\
+	&\quad \quad m_a m_b \Vert \mathbf{x} \Vert_a \leq \Vert \mathbf{x} \Vert_c \leq M_a M_b \Vert \mathbf{x} \Vert_a
+	\end{align*}
+	
+	(i) $\Vert \mathbf{x} \Vert_2 \leq \Vert \mathbf{x} \Vert_1 \leq \sqrt{n} \Vert \mathbf{x} \Vert_2$. To save time on notation, all sums below are over n.
+	\begin{align*}
+	 &\Vert \mathbf{x} \Vert_2^2 = (\sum (x_i)^2) = \sum |x_i|^2 \leq (\sum |x_i|)^2 = \Vert \mathbf{x} \Vert_1^2 \\
+	 &\implies \Vert \mathbf{x} \Vert_2 \leq \Vert \mathbf{x} \Vert_1 \\
+	 &\Vert \mathbf{x} \Vert_1 = \sum |x_i| = \sum |x_i| .1 \leq (\sum |x_1|^2)^{1/2}(\sum 1^2)^{1/2} = \sqrt{n} \Vert \mathbf{x} \Vert_2 \text{ By Cauchy Schwarz}
+	\end{align*}
+	
+	(ii) $\Vert \mathbf{x} \Vert_\infty \leq \Vert \mathbf{x} \Vert_2 \leq \sqrt{n} \Vert \mathbf{x} \Vert_\infty$
+	\begin{align*}
+	&\Vert \mathbf{x} \Vert_\infty = (\max_i |x_i|)^2 \leq \sum x_i^2 = \Vert \mathbf{x} \Vert_2 \\
+	&\implies \Vert \mathbf{x} \Vert_\infty \leq \Vert \mathbf{x} \Vert_2  \\
+	& \Vert \mathbf{x} \Vert_2 = (\sum(x_i)^2)^{1/2} \leq (\sum \max_i x_i^2)^{1/2} = \sqrt{n} (\max_i (x_i)^2)^{1/2}  = \sqrt{n} \max_i |x_i|
+	\end{align*}
+	
+	\subsection*{3.28}
+	Let $A$ be an $n \times n$ matrix. We will show the topological equivalence of the operator $p$-norms. We will use the results from 3.27.
+	
+	(i) From 3.26(i), we have $\Vert \mathbf{x} \Vert_2 \leq \Vert \mathbf{x} \Vert_1 \leq \sqrt{n} \Vert \mathbf{x} \Vert_2$. We can also manipulate this inequality to get $\frac{1}{\sqrt{n}} \Vert \mathbf{x} \Vert_1 \leq \Vert \mathbf{x} \Vert_2 \leq \Vert \mathbf{x} \Vert_1$.
+	
+	\begin{align*}
+	\frac{1}{\sqrt{n}} \Vert A \Vert_2 &= \frac{1}{\sqrt{n}} \sup_{\mathbf{x} \neq 0} \frac{ \Vert A \mathbf{x} \Vert_2}{\Vert \mathbf{x} \Vert_2} \\
+	&\leq \sup_{\mathbf{x} \neq 0} \frac{\Vert A \mathbf{x} \Vert_1}{\sqrt{n} \Vert \mathbf{x} \Vert_2} \\
+	&\leq \sup_{\mathbf{x} \neq 0} \frac{\Vert A \mathbf{x} \Vert_1}{\Vert \mathbf{x} \Vert_1} = \Vert A \Vert_1
+	\end{align*}
+	
+	\begin{align*}
+	\Vert A \Vert_1 &= \sup_{\mathbf{x} \neq 0} \frac{\Vert A \mathbf{x} \Vert_1}{\Vert \mathbf{x} \Vert_1} \\
+	&\leq \sqrt{n} \sup_{\mathbf{x} \neq 0} \frac{\Vert A \mathbf{x} \Vert_2}{\Vert \mathbf{x} \Vert_1} \\
+	&\leq \sqrt{n} \sup_{\mathbf{x} \neq 0} \frac{\Vert A \mathbf{x} \Vert_2}{\Vert \mathbf{x} \Vert_2} = \sqrt{n} \Vert A \Vert_2
+	\end{align*}
+	
+	(ii) From 3.26(ii), we have $\Vert \mathbf{x} \Vert_{\infty} \leq \Vert \mathbf{x} \Vert_2 \leq \sqrt{n} \Vert \mathbf{x} \Vert_\infty$. Manipulating this expression also yields $\frac{1}{\sqrt{n}} \Vert \mathbf{x} \Vert_2 \leq \Vert \mathbf{x} \Vert_{\infty} \leq \Vert \mathbf{x} \Vert_2$.
+	
+	\begin{align*}
+	\frac{1}{\sqrt{n}} \Vert A \Vert_{\infty} &= \frac{1}{\sqrt{n}} \sup_{\mathbf{x} \neq 0} \frac{\Vert A \mathbf{x} \Vert_{\infty}}{\Vert \mathbf{x} \Vert_{\infty}} \\
+	&\leq \sup_{\mathbf{x} \neq 0} \frac{ \Vert A \mathbf{x} \Vert_2}{\sqrt{n} \Vert \mathbf{x} \Vert_{\infty}} \\
+	&\leq \sup_{\mathbf{x} \neq 0} \frac{\Vert A \mathbf{x} \Vert_2}{\Vert \mathbf{x} \Vert_2} = \Vert A \Vert_2
+	\end{align*}
+	
+	\begin{align*}
+	\Vert A \Vert_2 &= \sup_{\mathbf{x} \neq 0} \frac{ \Vert A \mathbf{x} \Vert_2}{\Vert \mathbf{x} \Vert_2} \\
+	&\leq \sqrt{n} \sup_{\mathbf{x} \neq 0} \frac{ \Vert A \mathbf{x} \Vert_\infty}{\Vert \mathbf{x} \Vert_2} \\
+	&\leq \sqrt{n} \sup_{\mathbf{x} \neq 0} \frac{\Vert A \mathbf{x} \Vert_\infty}{\Vert \mathbf{x} \Vert_{\infty}} = \sqrt{n} \Vert A \Vert_{\infty}
+	\end{align*}
+	
+	\subsection*{3.29}
+	Lets consider $\mathbb{F}^n$ with the 2-norm, and let the norm on $M_n(\mathbb{F})$ be the induced norm. Note that given any orthonormal matrix $Q \in M_n(\mathbb{F})$, $ \Vert Q \Vert = \sup_{\mathbf{x} = 1} \Vert Q \mathbf{x} \Vert_2 = \sup_{\mathbf{x} = 1} 1 = 1$. 
+	
+	Now consider the linear map $R_\mathbf{x} : M_n(\mathbb{F}) \to \mathbb{F}^n$ be given by $A \to A \mathbf{x}$. 
+	\begin{align*}
+	\Vert R_{\mathbf{x}} \Vert &= \sup_{\Vert A \Vert_2 \neq 0} \frac{\Vert A \mathbf{x}\Vert_2 }{\Vert A \Vert_2} \\
+	&\leq \frac{\Vert A \mathbf{x} \Vert_2 \Vert \mathbf{x} \Vert_2}{\Vert A \mathbf{x} \Vert_2}\\
+	&= \Vert \mathbf{x} \Vert_2
+	\end{align*}
+	
+	Next, consider the alternate definition of $\Vert R_\mathbf{x} \Vert$. Given any vector $\mathbf{x}$, we can write it as $\Vert \mathbf{x} \Vert_2 \mathbf{x} / \Vert \mathbf{x} \Vert_2$. 
+	\begin{align*}
+	\Vert R_\mathbf{x} \Vert &= \sup_{\Vert A \Vert_2 = 1} \Vert A \mathbf{x} \Vert_2\\
+	&= \Vert \mathbf{x} \Vert_2 \sup_{\Vert A \Vert_2 = 1} \Vert A \mathbf{x} / \Vert \mathbf{x} \Vert_2 \Vert_2 
+	\end{align*}
+	Now since $\mathbf{v} = \mathbf{x} / \Vert \mathbf{x} \Vert_2$ has norm 1, it follows that we can find some orthonormal matrix with $\mathbf{v}$ as its first row. This matrix will have norm 1, as we have proven above. Now this implies that:
+	
+	\begin{align*}
+	\Vert R_\mathbf{x} \Vert &= \Vert \mathbf{x} \Vert_2 \sup_{\Vert A \Vert_2 = 1} \Vert A \mathbf{x} / \Vert \mathbf{x} \Vert_2 \Vert_2  \\
+	&\geq \Vert \mathbf{x} \Vert_2
+	\end{align*}
+	
+	Combining these two inequalities shows that $ \Vert R_\mathbf{x} \Vert_2 = \Vert \mathbf{x} \Vert_2$.
+	
+	\subsection*{3.30}
+	Let $S \in M_n(\mathbb{F})$ be an invertible matrix. Given any norm $\Vert  . \Vert$, we define $\Vert . \Vert_S$ by $\Vert A \Vert_S = \Vert S A S^{-1} \Vert$. We will prove that $\Vert. \Vert_S$ is also a matrix norm, i.e. it fulfills the same properties we explored in 3.24.
+	
+	\begin{align*}
+	&(1a) \quad \Vert A \Vert_S = \Vert S A S^{-1} \Vert \geq 0 \\
+	&(1b) \quad \Vert A \Vert_S = 0 \iff S A S^{-1} = 0 \iff A = 0 \text{ Note here that $S \neq 0$ since $S$ is invertible} \\
+	&(2) \quad \Vert k A \Vert_S = \Vert S k A S^{-1} \Vert = |k| \Vert S A S^{-1} \Vert = |k| \Vert A \Vert_S \\
+	&(3) \quad \Vert A + B \Vert_S = \Vert S (A + B) S^{-1} \Vert \leq \Vert S A S^{-1} \Vert + \Vert S B S^{-1} \Vert  \leq \Vert A \Vert_S + \Vert B \Vert_S \text{ Triangle inequality for $\Vert . \Vert$} 
+	\end{align*}
+	
+	\subsection*{3.37}
+	Let $V = \mathbb{R}[x;2]$ be the space of polynomials of at least two. We can consider the basis of $V$ given by $\begin{bmatrix} 1 & x & x^2\end{bmatrix}$. Now we define $L: V \to \mathbb{R}$ to be given by $L[p] = p'(1)$. 
+	
+	Now given any polynomial $p(x) = ax^2 + bx + c$, we know that $p(1) = 2a + b$. So, the required $q \in V$ such that $L(p) = \inprod{q,p}$ is $\begin{bmatrix} 0 & 1 & 2 \end{bmatrix}$. Since $\begin{bmatrix} 0 & 1 & 2 \end{bmatrix} \begin{bmatrix} c \\ b \\ a\end{bmatrix} = 2a + b$.
+	
+	\subsection*{3.38}
+	Let $V = \mathbb{F}[x;2]$, the subspace of the inner product space $L^2([0,1];\mathbb{R})$. We want to get the derivative operator $D: V \to V$ given by $D[p(x)] = p'(x)$. Once again lets consider the power basis $[1,x,x^2]$. 
+	
+	Given any polynomial $p = ax^2 + bx + c$, $p' = 2ax + b$. So we want a matrix such that $A \begin{bmatrix} a \\ b \\ c \end{bmatrix} = \begin{bmatrix} 0 \\ 2a \\ b \end{bmatrix}$.
+	
+	It is easy to see that 
+	\[ A = \begin{bmatrix} 0 & 0 & 0 \\ 2 & 0 & 0 \\ 0 & 1 & 0 \end{bmatrix}  \]
+	
+	\subsection*{3.39}
+	We will prove proposition 3.7.12 on the properties of adjoints using the properties of inner products. Here, we also use the fact that if the adjoint exists, it is unique.
+	
+	(i) If $S,T \in L(V;W)$, then $(S+T)^* = S^* + T^*$ and $(\alpha T)^* = \bar{\alpha} T^*$. 
+	\begin{align*}
+	&\inprod{y ,(S+T)x} = \inprod{y, Sx} + \inprod{y, Tx} = \inprod{S^* y, x} + \inprod{T^* y, x} = \inprod{(S^* + T^* )y, x} \\
+	&\inprod{y, \alpha T x} = \alpha \inprod{y, Tx} = \alpha \inprod{T^* y, x} = \inprod{\bar{\alpha} T^* y, x}
+	\end{align*}
+	
+	(ii) If $ S \in L(V;W)$, then $(S^*)^* = S$.
+	\begin{align*}
+	&\inprod{y, S^* x} = \overline{\inprod{S^* x, y}} = \overline{\inprod{x, Sy}} = \inprod{Sy, x}
+	\end{align*}
+	
+	(iii) If $S, T \in L(V;W)$, then $(ST)^* = T^* S^*$.
+	\begin{align*}
+	&\inprod{y, STx} = \inprod{S^*y, Tx} = \inprod{T^* S^*y, x}
+	\end{align*}
+	
+	(iv) If $T \in L(V;W)$, then $(T^*)^{-1} = (T^{-1})^*$.
+	\begin{align*}
+	&S = T^{-1} \\
+	&\text{From (iii) } (ST)^* = I^* = I = T^* S^* \\
+	&T^* (T^{-1})^* = I \implies (T^{-1})^* = (T^*)^{-1}
+	\end{align*}
+	
+	\subsection*{3.40}
+	Let $M_n(\mathbb{F})$ be endowed with the Frobenius inner product. Given any $A \in M_n(\mathbb{F})$, we can define a linear operator by left multiplication. The following results follow from the properties of trace.
+	
+	(i) $A^* = A^H$.
+	\begin{align*}
+	&\inprod{Y, AX} = tr(Y^H A X) = \inprod{A^H Y, X}
+	\end{align*}
+	
+	(ii) Given $A_1, A_2, A_3 \in M_n(\mathbb{F})$, $\inprod{A_2, A_3A_1} = \inprod{A_2 A_1^* A_3}$. From (i), we know that $A^* = A^H$.
+	\begin{align*}
+	\inprod{A_2, A_3A_1} = tr(A_2^*A_3 A_1) = tr(A_1 A_2^* A_3) = \inprod{A_2 A_1^*, A_3}
+	\end{align*}
+	
+	(iii) Define $T_A : M_n(\mathbb{F}) \to M_n(\mathbb{F})$ by $T_A(X) = AX - XA$. We want to show that $T_A^* = T_{A^*}$.
+	\begin{align*}
+	\inprod{Y, T_A(X)} = \inprod{Y, AX - XA} = tr(Y^*AX) - tr(Y^* XA) = \inprod{A^*Y, X} - \inprod{YA^*, X} = \inprod{T_{A^*}(Y), X}
+	\end{align*}
+	
+	\subsection*{3.44}
+	Given $A \in M_{m\times n }(\mathbb{F})$ and $\mathbf{b} \in \mathbb{F}^m$, we will prove that either $A \mathbf{x} = \mathbf{b}$ has a solution $\mathbf{x} \in \mathbb{F}^n$ or there exists $\mathbf{y} \in N(A^H)$ such that $\inprod{\mathbf{y}, \mathbf{b}} \neq 0$.
+	
+	\begin{proof}
+		We will use the fundamental subspaces theorem (FST). If there is a solution $\mathbf{x}$ such that $A \mathbf{x} = \mathbf{b}$, then $\mathbf{b} \in R(A)$. Then by the FST, $\mathbf{b} \in N(A^H)^{\perp}$, i.e $\forall \mathbf{y} \in N(A^H)$, $\inprod{\mathbf{y},\mathbf{b}} = 0$. 
+		
+		Now if there does not exist a solution, then $\mathbf{b} \notin N(A^H)^{\perp}$. I.e. $\exists \mathbf{y} \in N(A^H)$ such that $\inprod{\mathbf{y} ,\mathbf{b}} \neq 0$
+	\end{proof}
+	
+	\subsection*{3.45}
+	Consider any $A \in \text{Skew}_n(\mathbb{R})$, we will first show that for any $B \in \text{Sym}_n(\mathbb{R})$, $\inprod{B,A} = 0$. 
+	\begin{align*}
+	&\inprod{B,A} = tr(BA) = tr(A^H B^H) = -tr(B A) \\
+	&\implies tr(BA) = 0
+	\end{align*}
+	So it follows from our definition that $\text{Skew}_n(\mathbb{R}) \subset \text{Sym}_n(\mathbb{R})^{\perp}$. 
+	
+	Now consider any $X \in \text{Sym}_n(\mathbb{R})^{\perp}$ and $A \in \text{Sym}_n(\mathbb{R})$
+	\begin{align*}
+	&\inprod{A, X} = tr(AX) = 0 =  tr(-X^HA) \\
+	&\implies X^H = -X
+	\end{align*}
+	So $\text{Sym}_n(\mathbb{R})^{\perp} \subset \text{Skew}_n(\mathbb{R})$, and so $\text{Sym}_n(\mathbb{R})^{\perp} = \text{Skew}_n(\mathbb{R})$ 
+	
+	\subsection*{3.46}
+	Consider an $m \times n$ matrix A:
+	
+	(i) If $\mathbf{x} \in N(A^H A)$. Now we know that $A^H A \mathbf{x} = \mathbf{0}$, i.e. $A \mathbf{x} \in N(A^H)$. It is also clear that $A \mathbf{x} \in R(A)$.
+	
+	(ii) $N(A^HA) = N(A)$. We will prove that $N(A^HA) \subset N(A)$ and $N(A) \subset N(A^HA)$. Consider $\mathbf{x} \in N(A)$, then $A^H A \mathbf{x} = A^H \mathbf{0} = \mathbf{0}$, so $\mathbf{x} \in N(A^HA)$. Next consider $\mathbf{x} \in N(A^H A)$. Then $A^H A \mathbf{x} = \mathbf{0}$. Now $\mathbf{x}^T A^H A \mathbf{x} = 0 \implies \inprod{A \mathbf{x} , A \mathbf{x}} = 0 \implies A \mathbf{x} = \mathbf{0}$. So $\mathbf{x} \in N(A)$. 
+	
+	(iii) From rank nullity, $dim(N(A^H A)) + rank(A^H A) = n$, and $rank(A) + dim(N(A)) = n$. Now since $N(A^H A) = N(A)$, then it follows that they have the same dimension, and so $A$ and $A^HA$ have the same rank.
+	
+	(iv) If $A$ has linearly independent columns, than $rank(A) = n$. Now note that $A^HA$ is a $n \times n$ matrix with rank $n$. Since this matrix is full rank, therefore it is invertible, and hence non-singular.
+	
+	\subsection*{3.47}
+	Assume $A$ is a $m \times n$ matrix of rank $n$. Let $P = A(A^H A)^{-1} A^H$. We will show the following: 
+	
+	(i) $P^2 = P$.
+	\[ P^2 = A(A^H A)^{-1} A^H A (A^H A)^{-1} A^H = A(A^H A)^{-1} A^H = P \]
+	
+	(ii) $P^H = P$. 
+	\[ P^H = (A (A^H A)^{-1} A^H)^H = A (A^H A)^{-1} A^H = A(A^HA)^{-1} A^H \]
+	
+	(iii) $rank(P) = n$.
+	From rank nullity, we know that $rank(P) = n - dim(N(P))$. Now we will show that $N(P) = \{ \mathbf{0} \}$. Consider $\mathbf{b}  \neq \mathbf{0} \in N(P)$. 
+	\begin{align*}
+	A(A^HA)^{-1}A^H \mathbf{b} = \mathbf{0} \\
+	\end{align*} 
+	From our Least Squares Framework, we know that $A \hat{\mathbf{x}} = A(A^H A)^{-1} A^H \mathbf{b}$. Now we also know that $\mathbf{\mathbf{x}}$ is a unique solution to $ A \mathbf{x} = \mathbf{b}$. However, since $A \hat{\mathbf{x}} = \mathbf{0}$, and $A$ is injective, then it follows that $\mathbf{x} = \mathbf{0}$, which implies that $A \mathbf{x} = \mathbf{b} = 0$, a contradiction.
+	
+	So the null space of $P$ must be the zero vector, and so we are done.
+	
+	\subsection*{3.48}
+	Consider the vector space $M_n(\mathbb{R})$. Let $P(A) = \frac{A + A^T}{2}$ be the map from $M_n(\mathbb{R})$ to itself. 
+	
+	(i) $P(X+Y) = \frac{(X+Y) + (X+Y)^T}{2} = \frac{X + X^T}{2} + \frac{Y + Y^T}{2} = P(X) + P(Y)$. 
+	
+	(ii) $P^2 = \frac{(X+X^T)/2 + (X + X^T)/2}{2} = \frac{X + X^T}{2} = P(X)$.
+	
+	(iii) 
+	\begin{align*}
+	\inprod{Y, P(X)} &= tr(\frac{YX+ YX^T}{2}) = tr(\frac{YX}{2}) + tr(\frac{X^TY}{2}) \\
+	&=tr( \frac{Y+ Y^T}{2} X) \\
+	&= \inprod{P(Y),X} = \inprod{P^*(Y), X}
+	\end{align*}
+	
+	(iv) $N(P)$ is the set of all $\mathbf{x}$ such that $P(\mathbf{x}) + 0$. Now from the definition of $A$, this is true $iff A^T = -A$, which implies that $A \in \text{Skew}_n \mathbb{R}$. 
+	
+	(v) Consider any $\frac{A+ A^T}{2}$. Then note that $\frac{(A + A^T)^T}{2} = \frac{A+ A^T}{2}$. So $R(P) \subset \text{Sym}_n(\mathbb{R})$. Now consider any $A \in \text{Sym}_n(\mathbb{R})$. Now $A = A^T = \frac{A+ A^T}{2}$. So $\text{Sym}_n(\mathbb{R}) \subset R(P)$. 
+	
+	(vi)
+	\begin{align*}
+	\Vert A - P(A) \Vert_F \sqrt{tr(\frac{(A^T - A)(A^T - A)}{4})} &= \sqrt{\frac{2tr(A^T A) - tr(A^2) - tr(((A^T)^2)}{4}} \\
+	&\text{Note that }tr(A^T A^T) = tr(A^2) \\
+	&= \sqrt{\frac{tr(A^T A) - tr(A^2)}{2}}
+	\end{align*}
+	
+	\subsection*{3.50}
+	Let $(x_i, y_i)_{i=1}^{n}$ be a collection of data points of the form $rx^2 + sy^2 = 1$. We can manipulate the equation to give $y^2 = \frac{1}{s} - \frac{r}{s} x^2$. Now we can write the normal equation.
+	
+	\begin{align*}
+	A = \begin{bmatrix} x_1^2 & 1 \\ \vdots & \vdots \\ x_n & 1 \end{bmatrix} \quad \mathbf{b} = \begin{bmatrix} \frac{r}{s} \\ \frac{1}{s} \end{bmatrix} \quad \mathbf{y} = \begin{bmatrix} y_1^2 \\ \vdots \\ y_n^2 \end{bmatrix}
+	\end{align*}
+	\end{document}
