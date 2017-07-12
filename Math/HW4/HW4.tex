@@ -28,262 +28,66 @@
 \newcommand{\inprod}[1]{\langle #1 \rangle}
 
 \begin{document}
-	\title{OSM Lab 2017: Math Pset 3}
+	\title{OSM Lab 2017: Math Pset 4}
 	\author{Wei Han Chia}
-	\date{Due: 10 July 2017}
+	\date{Due: 14 July 2017}
 	\maketitle
 	
 	\section*{Problems from the Book}
-	\subsection*{4.2}
-	Let $V = \text{span}(\{ 1, x, x^2\})$ be the subspace of the inner product space $L^2([0,1;\mathbb{R}])$. Consider the derivative operater $D$. We showed in a previous problem set that 
-	\[ D = \begin{bmatrix} 0 & 0 & 0 \\ 2 & 0 & 0 \\ 0 & 1 & 0 \end{bmatrix} \]
-	Now we are interested in finding all the eigenvalues and eigenspaces of $D$. We note that the characteristic polynomial of $D$ is given by $\det(zI - D) = z^3$. It follows that all the eigenvalues of $D$ are 0.
-	
-	Now we note that the algebraic multiplicity of $0$ is 3, but the span of the eigenspace of 0 is $1$, given by $span({1})$. 
-	
-	\subsection*{4.4}
-	Note that $\det[A^H - zI] = \overline{\det[A - {z}I]}$. This implies that the eigenvalues of the Hermitian of a matrix are the conjugates of the eigenvalues of the original matrix. 
-	
-	(i) Let us consider $A$ an Hermitian 2x2 matrix. From 4.3, note that $\det[A - \lambda I] = \lambda^2 - tr(A) \lambda + det(A) = \lambda^2 - tr(A^H) \lambda + det(A^H)$. Combining this and above, we know that $\lambda = \bar{\lambda}$, implying that all eigenvalues are real.
-	
-	(ii) Let us consider $A$ a skew-Hermitian 2x2 matrix. From 4.3, note that $\det[A^H - \lambda I ] = \lambda^2 - tr(A) \lambda - \det(A)$ Comparing the solutions to the quadratic formula, and using the equality above, we see that $\bar{\lambda} = - \lambda$, i.e. that all eigenvalues are imaginary.
-	
-	\subsection*{4.6}
-	We know that the determinant of an upper triangular matrix is its diagonal entries. We can prove this by the definition of the expansion theorem of determinants and induction.
-	
-	Now it follows that for any $n times n$ upper triangular matrix ($A$), $p_A(z) = \det(zI - A) = \pi_{i=1}^{n}  (z - a_{ii})$. So solving the characteristic polynomial yields the eigenvalues of $A$ as $\{ a_ii\}_{i=1}^{n}$. 
-	
-	\subsection*{4.8}
-	Let V be the span of the set $S = \{ \sin(x) , \cos(x), \sin(2x), \cos(2x) \}$.
-	
-	(i) In the previous problem set, we proved that each element of $S$ is pairwise orthogonal. This implies that they are a linearly independent set. To see this, consider constants such that $a_1 \sin(x) + a_2 \cos(x) + a_3 \sin(2x) + a_4 \cos(2x) = 0$
+	\subsection*{6.1}
+	Let us define the following functions.
 	\begin{align*}
-	\text{Taking inner product with respect to any } s \in S \\
-	\implies a_1 = a_2 = a_3 = a_4 = 0
-	\end{align*}
-	Now since V is the span of this linearly independent $S$, it follows that $S$ is a basis of $V$.
-	
-	(ii) Now let $D$ be the derivative operator. WE can construct $D$ simply by considering the derivative of each of the members of $S$.
-	\[ D = \begin{bmatrix} 0 & -1 & 0 & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & -2 \\ 0 & 0 & 2 & 0 \end{bmatrix} \]
-	
-	(iii) We want to find some $D$-invariant subspace of $S$, i.e. some $W \subset(S)$ s.t. $DW \subset w$. We note that the derivative of $\sin(x) $ and $\cos(x)$ will yield a function of $\sin(x)$ and $\cos(x)$, and so our two complementary D-invariant subspaces are $\text{span}\{\sin(x), \cos(x)\}$ and $\text{span}\{\sin(2x), \cos(2x)\}$.
-	
-	\subsection*{4.13}
-	Let
-	\[ A = \begin{bmatrix} 0.8 & 0.4 \\ 0.2 & 0.6 \end{bmatrix} \]
-	We want to find the transition matrix $P$ such that $P^{-1} A P$ is diagonal. We know that $A$ has two distinct eigenvectors, $x_1 = [1,-1]$ and $x_2 = [2,1]$, corresponding to eigenvalues of $0.4$ and $1$ respectively. From our diagonalization theorem, know that we can obtain the transition matrix $P$ by letting $P = [x_1, x_2]$, i.e.
-	\[ P = \begin{bmatrix} 1 & 2 \\ -1 & 1\end{bmatrix}\]
-	
-	\subsection*{4.15}
-	We will prove that if $(\lambda_i)_{i=1}^{n}$ are the eigenvalues of a semi-simple matrix $A$, and $f(x) = a_0 + a_1 x + ... + a_n x$, then $f(\lambda_i)_{i=1}^{n}$ are the eigenvalues of $f(A)$.
-	\begin{proof}
-	Since $A$ is semi-simple, it is diagonalizable. Lets write $A = P D P^{-1}$. Now $A^k = P D^k P^{-1}$. 
-	\[ f(A) = P(a_0 I + a_1 D + ... +a_n D^n)P{-1} \]
-	Now since $f(A)$ is diagonalizable, we know that it is semi-simple, and that its eigenvectors are given by the columns of $P$, and its eigenvalues given by the diagonal entries of $D$. So, the eigenvalues of $f(A)$ are $a_0 + a_1 \lambda + a_2 \lambda + ... + a_n \lambda$ for all $\lambda$ eigenvalues of $A$. So it follows that $(f(\lambda_i))_{i=1}^{n}$ are the eigenvalues of $f(A)$.
-	\end{proof}
-
-	\subsection*{4.16}
-	Let $A$ be the same matrix as in 4.13. 
-	
-	(i) We want to compute $\lim_{n \to \infty} A^n$. With respect to the matrix 1-norm (max absolute column sum). Note that $A^n = P D^n P^{-1}$. Now $\Vert A_n \Vert_1 = \Vert P \Vert \Vert D^n \Vert \Vert P^{-1} \Vert$. 
-	\begin{align*}
-	\Vert D^n \Vert = \begin{bmatrix} 0.4^n & 0 \\ 0 & 1 \end{bmatrix}
-	\end{align*}
-	Now we can simply let $B = P C P^{-1}$, where $C = \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}$. Now note that 
-	\begin{align*}
-	\Vert A^k - B \Vert = X 0.4^k 
-	\end{align*}
-	Where $X = \Vert P \Vert \Vert P^{-1} \Vert$. It is easy to see then that for any $\epsilon > 0$, there exists an $N$ such that $ X 0.4^k < \epsilon$ for all $k > N$. 
-	
-	(ii) We note that the $\infty-$norm and the Frobenius norm holds in the exact same way, sine we are only interested in the norm of the difference between $B$ and $A^k$, which is a matrix with only 1 entry.
-	
-	(iii) We can use Theorem 4.3.12 to note that the eigenvalues of $3I + 5A + A^3$ are $3 + 5 + 1 = 9$, and $3 + 2 + 0.064 = 5.064$. 
-	
-	\subsection*{4.18}
-	If $\lambda$ is an eigenvalue of $A \in M_n(\mathbb{F})$, then it is also an eigenvalue of $A^T$ (this follows because the determinant is invariant to transpose). Now consider $\mathbf{x} \neq 0$ the eigenvector of $A^T$ corresponding to $\lambda$.
-	\begin{align*}
-	A^T \mathbf{x} = \lambda \mathbf{x} \\
-	\text{Taking transpose} \quad
-	\mathbf{x}^T A = \lambda \mathbf{x}^T
+	f(\mathbf{w}) = e^{-\mathbf{w}^T \mathbf{x}} \\
+	G(\mathbf{w}) = \mathbf{w}^T \mathbf{x} - \mathbf{w}^T A \mathbf{w} + \mathbf{w}^T A \mathbf{y} \\
+	H(\mathbf{w}) = \mathbf{y}^T \mathbf{w} - \mathbf{w}^T \mathbf{x}
 	\end{align*}
 	
-	\subsection*{4.20}
-	Let $A$ be Hermitian and orthonormally similar to $B$. We will show that $B$ is also Hermitian, i.e. $B^H = B$.
+	Now we can write our optimization problem in the usual form:
 	\begin{align*}
-	B &= U^H A U \\
-	B^H &= U^H A^H U \\
-	&= U^H A U = B
+	\min \quad&- f(\mathbf{w}) \\
+	s.t. \quad&-G(\mathbf{w}) \leq a \\
+	&H(\mathbf{w}) = b
 	\end{align*}
 	
-	\subsection*{4.24}
-	Given $A \in M_n(\mathbb{C})$, we define the Rayleigh quotient as
-	\[ \rho(\mathbf{x}) = \frac{\inprod{\mathbf{x}, A \mathbf{x}}}{\Vert \mathbf{x} \Vert^2}\]
-	We will show that the Rayleigh quotient is bounded by the eigenvalues of $A$, and so it will follow from 4.4 that it can only take on real values for Hermitian matrices and imaginary values for skew-Hermitian matrices. 
-	
-	First, note that both Hermitian and skew-Hermitian matrices are diagonalizable. This follows from Shur's lemma, and noting that an upper triangular matrix that is symmetric or skew-symmetric is diagonalizable. Now we know that these matrices are semi-simple, i.e .that the diagonal matrix D they are similar to is the matrix of its eigenvalues.
-	
+	\subsection*{6.5}
+	We know that profits can be defined as $0.07 x + 0.05 y$, where $x$ is the number of milk bottles, and $y$ is the number of plastic knobs. We also have the following constraints on plastic ($4x + 3y \leq 240$) and on labor ($2x + y \leq 100$). We can write these constraints into a matrix:
 	\begin{align*}
-	\rho(\mathbf{x}) &= \frac{\mathbf{x}^H A \mathbf{x}}{\mathbf{x}^H \mathbf{x}} = \frac{\mathbf{x}^H V^H D V \mathbf{x}}{\mathbf{x}^H V^H V \mathbf{x}} \\
-	&= \frac{\sum_{i=1}^{n} \lambda_i y_i^2}{\sum_{i=1}^{n} y_i^2} \quad \text{Where } V \mathbf{x} = \sum_{i=1}^{n} y_i
+	A = \begin{bmatrix} 4 & 3 \\ 2 & 1 \end{bmatrix}
 	\end{align*}
 	
-	Clearly then $\rho(\mathbf{x})$ is a weighted average of eigenvalues of $A$, which allows us to conclude that in the case of Hermitian matrices, the Rayleigh quotient is always real, and in the case of skew-Hermitian matrices, it is always imaginary.
-	
-	\subsection*{4.25}
-	Let $A \in M_n(\mathbb{C})$ be a normal matrix with eigenvalues ($\lambda_1,...,\lambda_n$) and corresponding orthonormal eigenvectors $[\mathbf{x}_1, ..., \mathbf{x}_n]$.
-	
-	(i) We will show that the identity matrix can be written $I = \mathbf{x}_1 \mathbf{x}_1^H + ... + \mathbf{x}_n \mathbf{x}_n^H$. Consider any $\mathbf{v} \in \mathbb{C}^n$. We can represent $\mathbf{v}$ as a $\sum_{i=1}^{n} \alpha_i \mathbf{x}_i$. Now
+	We can then write our problem into the standard form of an optimization problem:
 	\begin{align*}
-	I \mathbf{v} &= \mathbf{v} \\
-	(\mathbf{x}_1 \mathbf{x}_1^H + ... + \mathbf{x}_n \mathbf{x}_n^H) \mathbf{v} &=(\mathbf{x}_1 \mathbf{x}_1^H + ... + \mathbf{x}_n \mathbf{x}_n^H)  \sum_{i=1}^{n} \alpha_i \mathbf{x}_i \\
-	&= \sum_{i=1}^{n} \alpha_i \mathbf{x}_i = \mathbf{v} 
-	\end{align*}
-	Where the last result follows using the usual inner product and the fact that each $\mathbf{x}$ are orthonormal. 
-	
-	(ii) Now similarly, consider $A$.
-	\begin{align*}
-	A \mathbf{v} &= \sum_{i=1}^{n} \alpha_i A \mathbf{x}_i = \sum_{i=1}^{n} \alpha_i \lambda_i \mathbf{x}_i \\
-	(\lambda_1 \mathbf{x}_1 \mathbf{x}_1^H + ... + \lambda_n \mathbf{x}_n \mathbf{x}_n^H ) \mathbf{v} &= (\lambda_1 \mathbf{x}_1 \mathbf{x}_1^H + ... + \lambda_n \mathbf{x}_n \mathbf{x}_n^H ) \sum_{i=1}^{n} \alpha_i \mathbf{x}_i \\
-	&= \sum_{i=1}^{n} \alpha_i \lambda_i \mathbf{x}_i
-	\end{align*}
-	Therefore it similarly follows that $A$ can be written as $\lambda_1 \mathbf{x}_1 \mathbf{x}_1^H + ... + \lambda_n \mathbf{x}_n \mathbf{x}_n^H$.
-	
-	\subsection*{4.27} 
-	Let $A \in M_n(\mathbb{F})$. From remark 4.5.2, we know that $x^T A x$ is always real valued and positive.
-	
-	Now simply consider $e_i = [0,...0,1,0,...,0]$ the standard basis.
-	\begin{align*}
-	e_i^T A e_i = a_ii > 0
+	\min \quad& - 0.07x - 0.05y \\
+	s.t. \quad& A \begin{bmatrix} x \\ y \end{bmatrix} \leq \begin{bmatrix} 240 \\ 100 \end{bmatrix}
 	\end{align*}
 	
-	Applying this for all $i$ will show that every diagonal entry of $A$ is real valued and positive.
-	
-	\subsection*{4.28}
-	Assume $A, B \in M_n(\mathbb{F})$ are positive semi-definite. Since $B$ is positive semidefinite, we can diagonalize $B = U \Sigma U^T$, where $\Sigma$ is diagonal. Now note that we can define $B^{1/2} = U \Sigma^{1/2} U^T$ such that $B^{1/2} B^{1/2} = B$. Now 
+	\subsection*{5.5}
+	Consider the function 
+	\[ f(x,y) = 3x^2y + 4xy^2 + xy \]
+	We can take the partial derivatives and construct the Hessian
 	\begin{align*}
-	&tr(AB) = tr(AB^{1/2} B^{1/2}) = tr(B^{1/2} A B^{1/2}) \\
-	&\text{ $B^{1/2} A B^{1/2}$ is positive semi definite ince $A$ is psd so by 4.27 it has real positive diagonal entries}\\
-	&\implies tr(AB) \geq 0
+	D[f(x,y)] = \begin{bmatrix} 6xy + 4y^2 + y & 3x^2 + 8xy + x \end{bmatrix} \\
+	D^2[f(x,y)] = \begin{bmatrix} 6y & 8y + 6x + 1 \\ 6x + 8y + 1 & 8x \end{bmatrix}
 	\end{align*}
 	
-	Now for any diagonal matrix $D$ and $A$ with positive real entries on the diagonal, $tr(AD) \leq tr(A)tr(D)$. This follows by noting that $tr(AD) = \sum_{i=1}^{n} a_{ii} d_{ii} < (\sum_{i=1}^{n} a_{ii})(\sum_{j=1}^{n} d_{ii}) $ So,
+	Solving the equation for $D[f(x,y)] = 0$ gives the following pairs of points, $(0,0),(0, -\frac{1}{4}), (-\frac{1}{3}, 0), (-\frac{1}{9}, -\frac{1}{12})$. We can then evaluate the Hessian to decide if these points are local maxima, minima or saddle points.
 	
 	\begin{align*}
-	tr(AB) &= tr(A U \Sigma U^T) = tr(U^T A U \Sigma U^T)\\
-	&\leq tr(U^T A U) tr(\Sigma ) \\
-	&\leq tr(A) tr(B)
+	D^2[f(0,0)] &= \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \\
+	D^2[f(0, \frac{-1}{4})] &= \begin{bmatrix} - 3/2 & - 1 \\ -1 & 0 \end{bmatrix} \\
+	D^2[f(\frac{-1}{3}, 0)] &= \begin{bmatrix} 0 & -1 \\ -1 & -8/3 \end{bmatrix} \\
+	D^2[f(\frac{-1}{9}, \frac{-1}{12})] &= \begin{bmatrix}  - 1/2 & - 1/3 \\ - 1/3 & -2/3 \end{bmatrix}
 	\end{align*}
 	
-	The only relevant condition we really need to check to prove that $\Vert . \Vert_F$ is a matrix norm is the triangle inequality. The others follow from the linearity and scalar multiplicativity of the trace.
+	Looking at the Hessian, we see that (0, -1/4) and (-1/9, -1/12) are both local maxima, since their Hessian is negative definite. In addition, we note that (0,0) and (-1/3, 0) are saddle points.
 	
+	\subsection*{6.11}
+	Consider $f(x) = ax^2 + bx + c$, $a > 0, b, c \in mathbb{R}$. Note that the unique minimizer of $f$ is given by $x = -\frac{b}{2a}$. We can obtain this by solving the first order conditions and noting that $f''(x) > 0$. 
+	
+	Now consider the Newton iteration starting at any $x_0$.
 	\begin{align*}
-	\Vert A + B \Vert_F^2 &= tr((A+B)^T(A+B)) = tr(A^TA) + tr(B^T B) + 2 tr(A^TB) \\
-	&\leq tr(A^TA) + tr(B^TB) \quad \text{Since $tr(A^TB) > 0$ from above} \\
-	&= \Vert A \Vert_F^2 + \Vert B \Vert_F^2
+	x_1 &= x_0 - \frac{f'(x_0)}{f''(x_0)} \\
+	&= x_0 - \frac{2a x_0 + b}{2a} \\
+	&= \frac{-b}{2a}
 	\end{align*}
-	
-	Now taking squareroots on both sides and using our usual inequality on real numbers yields the desired triangle inequality.
-	
-	\subsection*{4.31}
-	Assume $A \in M_{m \times n}(\mathbb{F})$, and $A$ is not identically zero.
-	
-	(i) Prove that $\Vert A \Vert_2 = \sigma_1$, where $\sigma_1$ is the largest singular value of $A$. 
-	\begin{proof}
-		\begin{align*}
-		\Vert A \Vert_2 &= \sup_{\Vert \mathbf{x} \Vert_2} \Vert A \mathbf{x} \Vert_2 \\
-		&= \sup \sqrt{\inprod{A \mathbf{x}, A \mathbf{x}}} \\
-		&= \sup \sqrt{\inprod{\mathbf{x}, A^H A \mathbf{x}}} \\
-		&\text{Note that the singular values of $A$ are precisely the eigenvectors of $A^H A$}\\
-		&\text{Since $A^HA$ is hermitian, we can diagonalize it to get} \\
-		&=\max_{1 \leq i \leq n} \sigma_i \Vert x \Vert_2 \\
-		&= \sigma_1
-		\end{align*}
-	\end{proof}
-	
-	(ii) Prove that if A is invertible, then $\Vert A^{-1} \Vert_2 = \sigma_n^{-1}$. 
-	\begin{proof}
-		We proceed as above substituting $A$ for $A^{-1}$, and noting that the largest singular value of $A^{-1}$ is precisely $\sigma_n^{-1}$. We can see this by noting that the eigenvalues of an inverse matrix is precisely the inverse of its eigenvalues, and that the singular values of $A$ are given by the eigenvalues of $A^H A$.
-	\end{proof}
-	
-	(iii) We will first prove that $\Vert A^H \Vert_2^2 = \Vert A^T \Vert_2^2 = \Vert A \Vert_2^2$. Recall that by SVD, we can represent $A = U \Sigma V^H$ where $U$ and $V$ are orthonormal.
-	\begin{align*}
-	\Vert A \Vert_2^2 &= \sup_{\Vert \mathbf{x} \Vert = 1} \Vert A \mathbf{x} \Vert_2^2 \\
-	&= \sup_{\Vert \mathbf{x} \Vert= 1} \Vert U \Sigma V^H  \mathbf{x} \Vert_2^2 \\
-	&= \sup_{\Vert \mathbf{x} \Vert =1} \Vert \Sigma \mathbf{x} \Vert_2^2 \quad \text{See part iv} \\
-	&= \sup_{\Vert \mathbf{x} \Vert = 1} \Vert \Sigma^T \mathbf{x} \Vert_2^2 = \Vert A^T \Vert_2^2 \\
-	&= \sup_{\Vert \mathbf{x} \Vert =1} \Vert \Sigma^H \mathbf{x} \Vert_2^2 = \Vert A^H \Vert_2^2 
-	\end{align*}
-	
-	Next, we note the following:
-	\begin{align*}
-	\Vert A^H A \Vert_2 &=  \Vert U \Sigma V^H V \Sigma U^H \Vert_2\\
-	&= \Vert U \Sigma^2 U^H \Vert_2 \\
-	&= \sup_{\Vert \mathbf{x} \Vert =1} \Vert \Sigma^2 \mathbf{x} \Vert_2 \\
-	&= \Vert A \Vert_2^2
-	\end{align*}
-	
-	(iv)
-	\begin{align*}
-	\Vert U A V \Vert_2 &= \sqrt{\sup \inprod{UAV \mathbf{x}, UAV \mathbf{x}}} \\
-	&= \sqrt{\sup \inprod{AV \mathbf{x}, AV \mathbf{x}}} \quad \text{Using the adjoint and the fact that U is orthonormal}\\
-	&= \sqrt{\sup \inprod{A \mathbf{x}, A \mathbf{x}}} \quad \text{Using the fact that V is orthonormal}\\
-	&= \Vert A \Vert_2
-	\end{align*}
-	
-	\subsection*{4.32}
-	Assume $A \in M_{m \times n}(\mathbb{F})$ is of rank $r$.
-	
-	(i) Prove that if $U \in M_{m}(\mathbb{F})$ and $V \in M_{n}(\mathbb{F})$ are orthonormal, then $\Vert UAV \Vert_F = \Vert A \Vert_F$.
-	\begin{proof}
-		\begin{align*}
-		\Vert UAV \Vert_F &= \sqrt{tr(V^H A^H U^H U A V)} \\
-		&= \sqrt{tr(A^H A)} = \Vert A \Vert_F
-		\end{align*}
-	\end{proof}
-	
-	(ii) Prove that $\Vert A \Vert_F = (\sigma_1^2 + ... + \sigma_r^2)^{1/2}$, where $\sigma_i$ are the singular values of A.
-	\begin{proof}
-		Using SVD, we can write $A = U \Sigma V^H$ where $U$ and $V$ re orthonormal. From (i), we know that $\Vert U \Sigma V^H \Vert_F = \Vert \Sigma \Vert_F$.
-		\begin{align*}
-		\Vert \Sigma \Vert_F = \sqrt{tr(\Sigma^H \Sigma)} = \sqrt{\sigma_1^2 + ... + \sigma_r^2}
-		\end{align*}
-	\end{proof}
-	
-	
-	\subsection*{4.33}
-	From 4.31(i), we know that $\Vert A \Vert_2 = \sigma_1$. Now all we need to prove is that $\sup_{\Vert \mathbf{x} \Vert_2 = 1, \Vert \mathbf{y} \Vert_2 = 1} |\mathbf{y}^H A \mathbf{x}|$.
-	
-	To see that $\sigma_1$ is an upper bound for $\sup_{\Vert \mathbf{x} \Vert_2 = 1, \Vert \mathbf{y} \Vert_2 = 1} |\mathbf{y}^H A \mathbf{x}|$
-	\begin{align*}
-	\sup_{\Vert \mathbf{y} \Vert_2 = \Vert \mathbf{x} \Vert_2 = 1} \mathbf{y}^H A \mathbf{x} &= \mathbf{y} U^H \Sigma V \mathbf{x} \\
-	&= \sup_{\Vert \mathbf{a} \Vert_2 = \Vert \mathbf{b} \Vert_2 = 1} \mathbf{a}^H A \mathbf{b} \quad \text{Because U and V are orthogonal} \\
-	&= \sup \frac{\sum_{i=1}^{n}\sigma_i  a_i b_i }{\sum_{i=1}^{n} a_i b_i}
-	\end{align*}
-	It is easy to see therefore that the RHS is a weighted average of singular values, i.e. that $\sigma_1$ is an upper bound, and is indeed the least upper bound for the RHS.
-	
-	\subsection*{4.36}
-	Consider the matrix
-	\[ A = \begin{bmatrix} -1 & -1 \\ 0 & 1 \end{bmatrix}\]
-	$A$ has eigenvalues $1, -1$, but has singular values $0.5*(1 + \sqrt{5})$, $\vert 0.5*(1 - \sqrt{5}) \vert$. 
-	
-	\subsection*{4.38}
-	Proving proposition 4.6.2 is simply substituting in our definition of the Moore-Penrose pseudoinverse and the compact SVD of A.
-	
-	(i) 
-	\[ A A^{\dagger} A = U_1 \Sigma_1 V_1^H V_1 \Sigma_1^{-1} U_1^H U_1 \Sigma_1 V_1^H = A \]
-	
-	(ii)
-	\[ A^{\dagger} A A^{\dagger} = V_1 \Sigma_1^{-1} U_1^H U_1 \Sigma_1 V_1^H V_1 \Sigma_1^{-1} U_1^H = A^{\dagger} \]
-	
-	(iii)
-	\[ (A A^{\dagger})^H = I = A A^{\dagger} \]
-	
-	(iv)
-	\[ (A^{\dagger} A)^H = I = A^{\dagger} A \]
-	
-	(v)
-	Note that $A A^{\dagger}$ is a map onto $R(A)$. Now from (i), $A A^{\dagger} A A^{\dagger} = A A^{\dagger}$, so $A A^{\dagger}$ is a projection. Finally, from (iii), we can conclude that this projection is orthogonal.
-	
-	(vi)
-	Similarly, note that $A^{\dagger} A$ is a map onto $R(A^H)$. From (ii), $A^{\dagger} A A^{\dagger} A = A^{\dagger} A$, so $A^{\dagger} A$ is a projection. Finally, from (iv), we can conclude that this projection is orthogonal.
 	\end{document}
