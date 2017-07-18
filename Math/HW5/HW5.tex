@@ -1,0 +1,101 @@
+\documentclass{article}
+
+%%% SOME USEFUL PACKAGES %%%
+\usepackage[english]{babel} % hyphenation
+\usepackage[margin=1.5cm]{geometry} % margins
+\usepackage{graphicx} % support for graphics
+\usepackage{amsmath} % support for math­e­mat­i­cal typesetting
+\usepackage{amssymb} % math­e­mat­i­cal symbols
+\usepackage{color} % support for colors
+\usepackage{mathtools} % more math­e­mat­i­cal type­set­ting
+\usepackage{amsthm} % for defining theorem-like environments
+\usepackage{enumerate} % change appearance of numbered lists
+\usepackage{framed} % textboxes
+\usepackage[format=plain,labelfont=bf,up]{caption} % cus­tomise cap­tions for fig­ures and ta­bles
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=blue,linktoc=all, citecolor=black]{hyperref} % hyperlinks
+\usepackage{setspace}
+\usepackage{verbatim}
+
+%%% CUSTOM COMMANDS %%%
+\def\ci{\perp\!\!\!\perp} % statistical independence symbol
+\newcommand{\ind}{1\hspace{-2.1mm}{1}} % indicator function
+\newcommand{\rl}{\mathbb{R}} % real numbers
+\newcommand{\ex}[1]{\mathbb{E} \left\{ #1 \right\}} % expectation operator
+\newcommand{\pr}[1]{\mathbb{P} \left\{ #1 \right\}} % probability
+\newcommand{\var}[1]{\mathbb{V}\text{ar} \left\{ #1 \right\}} % variance
+\newcommand{\cov}[1]{\mathbb{C}{ov} \left\{ #1 \right\}} % covariance
+\newcommand{\corr}[1]{\mathbb{C}{orr} \left\{ #1 \right\}} % correlation
+\newcommand{\inprod}[1]{\langle #1 \rangle}
+
+\begin{document}
+	\title{OSM Lab 2017: Math Pset 5}
+	\author{Wei Han Chia}
+	\date{Due: 21 July 2017}
+	\maketitle
+	
+	\section*{Problems from the Book}
+	\subsection*{7.1}
+	We will prove that if $S$ is a non-empty subset of $V$, then $conv(S)$ is convex.
+	
+	Consider $z, y \in conv(S)$. Then we know by definition that $z = \sum_{i=1}^{n} \lambda_{i,z} x_i $ and $y = \sum_{i=1}^{n} \lambda_{i,y} x_i$. Now consider:
+	\begin{align*}
+	\lambda z + (1 - \lambda) y &= \lambda \sum_{i=1}^{n} \lambda_{i, z} + (1-\lambda) \sum_{i=1}^{n} \lambda_i x_{i,y} \\
+	&= \sum_{i=1}^{n} (\lambda \lambda_{i,z} + (1-\lambda) \lambda_{i,y}) x_i 
+	\end{align*}
+	Now since $ \sum_{i=1}^{n} \lambda \lambda_{i,z} + (1-\lambda) \lambda_{i,y} = 1$, it follows that $\lambda z + (1 -\lambda)y$ is in $conv(S)$. As this holds for every $z,y$ and any $\lambda \in [0,1]$, it follows that $conv(S)$ is convex.
+	
+	\subsection*{7.2}
+	(i) Consider $x, y \in P$, where $P$ is a hyperplane defined by $a, b$. Now:
+	\begin{align*}
+	\inprod{z = \lambda x + (1- \lambda) y, a} = \lambda \inprod{x, a} + (1- \lambda) \inprod{x, b} = b
+	\end{align*}
+	So $z \in P$, and therefore $P$ is convex.
+	
+	\noindent(ii)
+	Consider $x, y, \in H$, where $H$ is again the half space defined by $a, b$. Now:
+	\begin{align*}
+	\inprod{z = \lambda x + (1- \lambda) y, a} = \lambda \inprod{x, a} + (1 -\lambda) \inprod{y,a} \leq b
+	\end{align*} 
+	So $z \in H$, and therefore $H$ is convex.
+	
+	\subsection*{7.4}
+	We will use parts (i) - (iv) to prove hte following theorem. Let $C \subset \mathbb{R}^n$ be nonempty, closed and convex. A point $\mathbf{p} \in C$ is the projection of $\mathbf{x}$ onto $C$ iff
+	\[ \inprod{\mathbf{x} - \mathbf{p}, \mathbf{p} -\mathbf{y}} \geq 0 \quad \forall \mathbf{y} \in C \]
+	
+	\noindent(i)
+	\begin{align*}
+	\Vert \mathbf{x} - \mathbf{y} \Vert^2 &= \inprod{\mathbf{x}-\mathbf{y}, \mathbf{x}-\mathbf{y}} \\
+	&= \inprod{\mathbf{x} - \mathbf{p} + \mathbf{p} - \mathbf{y}, \mathbf{x} - \mathbf{p} + \mathbf{p} - \mathbf{y}} \\
+	&= \inprod{\mathbf{x} - \mathbf{p}, \mathbf{x} - \mathbf{p}} + \inprod{\mathbf{p} - \mathbf{y}, \mathbf{p} - \mathbf{y}} + 2 \inprod{\mathbf{x} - \mathbf{p}, \mathbf{p} - \mathbf{y}} \quad \text{From the bilinearity and symmetry of inner products} \\
+	&= \Vert \mathbf{x} - \mathbf{p} \Vert^2 + \Vert \mathbf{p} - \mathbf{y} \Vert^2 + 2 \inprod{\mathbf{x} - \mathbf{p}, \mathbf{p} - \mathbf{y}}
+	\end{align*}
+	
+	\noindent(ii)
+	From (i), we know that if $2 \inprod{\mathbf{x} - \mathbf{p}, \mathbf{p} - \mathbf{y}} \geq 0$, then
+	\begin{align*}
+	\Vert \mathbf{x} - \mathbf{y} \Vert^2 &\geq \Vert \mathbf{x} - \mathbf{p} \Vert^2 + \Vert \mathbf{p} - \mathbf{y} \Vert^2  \\
+	&> \Vert \mathbf{x} - \mathbf{p} \Vert^2 \quad \text{Since } \Vert\mathbf{p} - \mathbf{y} \Vert^2 > 0 \text{ when }\mathbf{y} \neq \mathbf{p}
+	\end{align*}
+	This is ($\Rightarrow$)
+	
+	\noindent(iii)
+	If $\mathbf{z} = \lambda \mathbf{y} + (1 - \lambda) \mathbf{p}$, $\lambda \in [0,1]$, then 
+	\begin{align*}
+	\Vert \mathbf{x} - \mathbf{z} \Vert^2 &= \Vert \mathbf{x} - \mathbf{p} \Vert^2 + \Vert \mathbf{p} - \mathbf{z} \Vert^2 + 2 \inprod{\mathbf{x} - \mathbf{p}, \mathbf{p} - \mathbf{z}} \\
+	& \text{Substituting } \mathbf{z} = \lambda \mathbf{y} + (1- \lambda) \mathbf{p} \\
+	&= \Vert \mathbf{x} - \mathbf{p} \Vert^2 + \lambda^2 \Vert \mathbf{y} - \mathbf{p} \Vert^2 + 2\lambda \inprod{\mathbf{x} - \mathbf{p}, \mathbf{p} - \mathbf{y}}
+	\end{align*}
+	
+	\noindent(iv)
+	Now let $\mathbf{p}$ be a projection of $\mathbf{x}$ onto the convex set $C$. Since $C$ is convex, for any $\mathbf{y} \in C$, we can define $\mathbf{z} = \lambda \mathbf{y} + (1 - \lambda) \mathbf{p} \in C$. 
+	
+	Now since $\mathbf{p}$ is a projection, we know that 
+	\begin{align*}
+	\Vert \mathbf{x} - \mathbf{p} \Vert &\leq \Vert \mathbf{x} - \mathbf{z} \Vert \\
+	\Vert 0 &\leq \mathbf{x} - \mathbf{z} \Vert^2 - \Vert \mathbf{x} - \mathbf{p} \Vert^2 \\
+	\text{From (iii)} \\
+	&= \lambda^2 \Vert \mathbf{y} - \mathbf{p} \Vert^2 + 2 \lambda \inprod{\mathbf{x} - \mathbf{p}, \mathbf{p} - \mathbf{y}}  \\
+	&= \lambda \Vert \mathbf{y} - \mathbf{p} \Vert^2 + 2 \inprod{\mathbf{x} - \mathbf{p}, \mathbf{p} - \mathbf{y}}
+	\end{align*}
+	Now since $\lambda \Vert \mathbf{y} - \mathbf{p} \Vert^2 > 0$, it follows that $\inprod{\mathbf{x} - \mathbf{p}, \mathbf{p} - \mathbf{y}} > 0$, and so we have $(\Leftarrow$).
+	\end{document}
