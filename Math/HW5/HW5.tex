@@ -98,4 +98,62 @@
 	&= \lambda \Vert \mathbf{y} - \mathbf{p} \Vert^2 + 2 \inprod{\mathbf{x} - \mathbf{p}, \mathbf{p} - \mathbf{y}}
 	\end{align*}
 	Now since $\lambda \Vert \mathbf{y} - \mathbf{p} \Vert^2 > 0$, it follows that $\inprod{\mathbf{x} - \mathbf{p}, \mathbf{p} - \mathbf{y}} > 0$, and so we have $(\Leftarrow$).
+	
+	\subsection*{7.6}
+	We will prove that if $f: \mathbb{R}^n \to \mathbb{R}$ is convex, then the set $S = \{ \mathbf{x} \mathbb{R}^n | f(\mathbf{x}) \leq c \} \subset \mathbb{R}^n$ is a convex set.
+	
+	\begin{proof}
+		Consider any $\mathbf{x}_1, \mathbf{x}_2$ in $S$, and any $\lambda \in [0,1]$. Now:
+		\begin{align*}
+		f(\lambda \mathbf{x}_1 + (1-\lambda)\mathbf{x}_2) \leq \lambda f(\mathbf{x}_1) + (1 -\lambda) f(\mathbf{x}_2) \leq c 
+		\end{align*}
+		So clearly $\lambda \mathbf{x}_1 + (1-\lambda)\mathbf{x}_2$ is in $S$, and so $S$ is convex.
+	\end{proof}
+	
+	\subsection*{7.7}
+	We will prove that for any convex set $C$, and convex functions $f_1,...,f_k$ taking $C$ to $\mathbb{R}$, and for any $\lambda_1, ..., \lambda_k \geq 0$, the function 
+	\[ f(\mathbf{x}) = \sum_{i=1}^{k} \lambda_i f_i(\mathbf{x}) \]
+	is convex.
+	
+	\begin{proof}
+		Consider any $\mathbf{x}_1, \mathbf{x}_2$ in $C$, $\lambda \in [0,1]$.
+		\begin{align*}
+		\lambda f(\mathbf{x}_1) + (1 -\lambda)f(\mathbf{x}_2) &= \lambda \sum_{i=1}^{k} \lambda_i f_i(\mathbf{x}_1) + (1 -\lambda) \sum_{i=1}^{k} \lambda_i f_i(\mathbf{x}_2) \\
+		&= \sum_{i=1}^{k} \lambda_i (\lambda f_i(\mathbf{x}_1) + (1 - \lambda) f_i(\mathbf{x}_2)) \\
+		&\geq \sum_{i=1}^{k} \lambda_i (f_i(\lambda \mathbf{x}_1 + (1 -\lambda)\mathbf{x}_2)) \\
+		&= f(\lambda \mathbf{x}_1 + (1 -\lambda)(\mathbf{x}_2))
+		\end{align*}
+		And so $f$ is a convex function.
+	\end{proof}
+	
+	\subsection*{7.13}
+	Lets assume $f(x) < M$ and $f$ is convex. Now consider $x, y \in \mathbb{R}^n$. We will prove this by contradiction. If $f$ were not constant, then there exists some $x, y$ such that $f(x) > f(y)$.
+	
+	Then,
+	$f(x) \leq \lambda(f(\lambda x + (1-\lambda)y)) + (1 - \lambda(f(y)))$.  But since $f(x) > f(y)$ ,we have $f(x) - f(y) + \lambda f(y) \leq \lambda(f(\lambda x + (1 -\lambda)y))$. Now note that as $\lambda \to \infty$, this implies that we have $\lim_{\lambda \to \infty} f(\lambda x + ( 1- \lambda y)) \geq \lim_{\lambda \to \infty} \frac{f(x) - f(y)}{\lambda} + f(y) = \infty$.
+	
+	However, this implies that $f$ is unbounded, a contradiction.
+	
+	\subsection*{7.20}
+	We will prove that if $f: \mathbb{R}^n \to \mathbb{R}$ is convex and $-f$ is also convex, then $f$ is affine. 
+	
+	Consider $x, y \in \mathbb{R}^n$. 
+	\begin{align*}
+	f(\lambda x + (1 -\lambda)y) \leq \lambda f(x) + (1 -\lambda) f(y) \quad \text{Since $f$ is convex} \\
+	f(\lambda x + (1 -\lambda)y) \geq \lambda f(x) + (1 -\lambda) f(y) \quad \text{Since $-f$ is convex} \\
+	\implies f(\lambda x + (1 -\lambda)y) = \lambda f(x) + (1 -\lambda) f(y)
+	\end{align*}
+	Now clearly $f$ is a linear transformation, and so our function $f$ is an affine function with $L = f$ and $c = 0$. 
+	
+	\subsection*{7.21}
+	We will show that if $D \subset \mathbb{R}$ with $f:\mathbb{R}^n \to D$, and if $\phi: D \to \mathbb{R}$ is a strictly increasing function, then $\mathbf{x}^*$ is a local minimizer for $\phi \circ f(\mathbf{x})$ subject to constraints $G and H$ if and only if $\mathbf{x}^*$ is a local minimizer for the $f(\mathbf{x})$ subject to constraints $G and H$
+	
+	$\Leftarrow$
+	
+	Now if $\mathbf{x}^*$ is a local minimizer of $\phi \circ f$, since $\phi$ is strictly increasing, this implies that for all $\mathbf{x}$ fulfilling our constraints, $f(\mathbf{x}) \geq f(\mathbf{x}^*)$, and so $\mathbf{x}^*$ is a local minimizer of $f$ subject to the same constraints.
+	
+	
+	$\Rightarrow$
+	
+	Now if $\mathbf{x}^*$ is a local minimizer of $f$, then it follows that for all $\mathbf{x}$ subject to our constraints, $f(\mathbf{x}) \geq f(\mathbf{x}^*)$. Now since $\phi$ is strictly increasing, it follows that $\phi \circ f(\mathbf{x}) \geq \phi \circ f(\mathbf{x}^*)$ for all $\mathbf{x}$ subject to our constraints, and so it follows that $\mathbf{x}^*$ is a local minimizer of $\phi \circ f$ subject to our constraints.
 	\end{document}
