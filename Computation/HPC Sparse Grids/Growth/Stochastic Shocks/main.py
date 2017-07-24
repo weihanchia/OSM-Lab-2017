@@ -29,24 +29,32 @@ import numpy as np
 # Start with Value Function Iteration
 
 # terminal value function
-valnew=TasmanianSG.TasmanianSparseGrid()
 if (numstart==0):
-    valnew=interpol.sparse_grid(n_agents, iDepth, refinement_level, fTol)
-    valnew.write("valnew_1." + str(numstart) + ".txt") #write file to disk for restart
-
+    valnew = {}
+    for i in range(len(theta)):
+        valnew[str(i)]=TasmanianSG.TasmanianSparseGrid()
+        valnew[str(i)] = interpol.sparse_grid(n_agents, iDepth, refinement_level, fTol, i)
+        valnew[str(i)].write("valnew_" + str(i) + str(numstart) + ".txt") #write file to disk for restart
 # value function during iteration
 else:
-    valnew.read("valnew_1." + str(numstart) + ".txt")  #write file to disk for restart
+    valnew = {}
+    valold = {}
+    for i in range(len(theta)):
+        valnew[str(i)].read("valnew_" + str(i) + str(numstart) + ".txt")  #write file to disk for restart
+        valold[str(i)]=TasmanianSG.TasmanianSparseGrid()
+        valold[str(i)]=valnew[str(i)]
 
-valold=TasmanianSG.TasmanianSparseGrid()
 valold=valnew
 
 for i in range(numstart, numits):
-    valnew=TasmanianSG.TasmanianSparseGrid()
-    valnew=interpol_iter.sparse_grid_iter(n_agents, iDepth, refinement_level, fTol, valold)
-    valold=TasmanianSG.TasmanianSparseGrid()
-    valold=valnew
-    valnew.write("valnew_1." + str(i+1) + ".txt")
+    valnew = {}
+    for k in range(len(theta)):
+        valnew[str(k)]=TasmanianSG.TasmanianSparseGrid()
+        valnew[str(k)]=interpol_iter.sparse_grid_iter(n_agents, iDepth, refinement_level, fTol, valold, k)
+        valnew[str(k)].write("valnew_"+ str(k) + str(i+1) + ".txt")
+    for j in range(len(theta)):
+        valold[str(j)]=TasmanianSG.TasmanianSparseGrid()
+        valold[str(j)]=valnew[str(j)]
 
 #======================================================================
 print "==============================================================="
@@ -57,7 +65,9 @@ print "==============================================================="
 #======================================================================
 
 # compute errors
-avg_err=post.ls_error(n_agents, numstart, numits, No_samples)
+for i in range(len(theta)):
+    avg_err = {}
+    avg_err['str(i)']=post.ls_error(n_agents, numstart, numits, No_samples, i)
 
 #======================================================================
 print "==============================================================="

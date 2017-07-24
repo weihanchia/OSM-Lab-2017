@@ -16,7 +16,7 @@ import nonlinear_solver_initial as solver
 
 #======================================================================
 
-def sparse_grid(n_agents, iDepth,refinement_level, fTol ):
+def sparse_grid(n_agents, iDepth,refinement_level, fTol, zstate):
 
     grid  = TasmanianSG.TasmanianSparseGrid()
 
@@ -40,7 +40,7 @@ def sparse_grid(n_agents, iDepth,refinement_level, fTol ):
 
     file=open("comparison0.txt", 'w')
     for iI in range(iNumP1):
-        aVals[iI]=solver.initial(aPoints[iI], n_agents)[0]
+        aVals[iI]=solver.initial(aPoints[iI], n_agents, zstate)[0]
 
     grid.loadNeededPoints(aVals)
     #Find alpha by evaluating value function using the solver function call
@@ -50,7 +50,7 @@ def sparse_grid(n_agents, iDepth,refinement_level, fTol ):
         iNumP1=aPoints.shape[0]
         aVals=np.empty([iNumP1, 1])
         for iI in range(iNumP1):
-            aVals[iI]=solver.initial(aPoints[iI], n_agents)[0]
+            aVals[iI]=solver.initial(aPoints[iI], n_agents, zstate)[0]
             v=aVals[iI]*np.ones((1,1))
             to_print=np.hstack((aPoints[iI].reshape(1,n_agents), v))
             np.savetxt(file, to_print, fmt='%2.16f')

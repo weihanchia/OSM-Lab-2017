@@ -3,7 +3,7 @@
 #     This routine interfaces with the TASMANIAN Sparse grid
 #     The crucial part is
 #
-#     aVals[iI]=solver.initial(aPoints[iI], n_agents)[0]
+#     aVals[iI]=solveriter.iterate(aPoints[iI], n_agents)[0]
 #     => at every gridpoint, we solve an optimization problem
 #
 #     Simon Scheidegger, 11/16 ; 07/17
@@ -12,13 +12,14 @@
 import TasmanianSG
 import numpy as np
 from parameters import *
-import nonlinear_solver_initial as solver
+import nonlinear_solver_iterate as solveriter
 
 #======================================================================
 
-def sparse_grid(n_agents, iDepth,refinement_level, fTol ):
+def sparse_grid_iter(n_agents, iDepth, refinement_level, fTol, valold, zstate):
 
     grid  = TasmanianSG.TasmanianSparseGrid()
+
 
     k_range=np.array([k_bar, k_up])
 
@@ -29,8 +30,8 @@ def sparse_grid(n_agents, iDepth,refinement_level, fTol ):
         ranges[i]=k_range
 
     iDim=n_agents
+    iOut=1
 
-    # Generate Sparse Grids
     grid.makeLocalPolynomialGrid(iDim, iOut, iDepth, which_basis, "localp")
     grid.setDomainTransform(ranges)
 
@@ -38,19 +39,19 @@ def sparse_grid(n_agents, iDepth,refinement_level, fTol ):
     iNumP1 = aPoints.shape[0]
     aVals = np.empty([iNumP1,1])
 
-    file=open("comparison0.txt", 'w')
+    file=open("comparison1.txt", 'w')
     for iI in range(iNumP1):
-        aVals[iI]=solver.initial(aPoints[iI], n_agents)[0]
+        aVals[iI]=solveriter.iterate(aPoints[iI], n_agents, valold, zstate)[0]
+
 
     grid.loadNeededPoints(aVals)
-    #Find alpha by evaluating value function using the solver function call
+
     for iK in range(refinement_level):
         grid.setSurplusRefinement(fTol, 1, "fds")
         aPoints=grid.getNeededPoints()
-        iNumP1=aPoints.shape[0]
-        aVals=np.empty([iNumP1, 1])
-        for iI in range(iNumP1):
-            aVals[iI]=solver.initial(aPoints[iI], n_agents)[0]
+        aVals=np.empty([aPoints.shape[0], 1])
+        for iI in range(aPoints.shape[0]):
+            aVals[iI]=solveriter.iterate(aPoints[iI], n_agents, valold, zstate)[0]
             v=aVals[iI]*np.ones((1,1))
             to_print=np.hstack((aPoints[iI].reshape(1,n_agents), v))
             np.savetxt(file, to_print, fmt='%2.16f')
@@ -59,9 +60,10 @@ def sparse_grid(n_agents, iDepth,refinement_level, fTol ):
     file.close()
 
 
-    f=open("grid.txt", 'w')
+    f=open("grid_iter.txt", 'w')
     np.savetxt(f, aPoints, fmt='% 2.16f')
     f.close()
 
     return grid
+
 #======================================================================

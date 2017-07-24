@@ -35,22 +35,30 @@ def sparse_grid_iter(n_agents, iDepth, refinement_level, fTol, valold):
     grid.makeLocalPolynomialGrid(iDim, iOut, iDepth, which_basis, "localp")
     grid.setDomainTransform(ranges)
 
-    iNumP1=aPoints.shape[0]
-
+    aPoints = grid.getPoints()
+    iNumP1 = aPoints.shape[0]
+    aVals = np.empty([iNumP1,1])
 
     file=open("comparison1.txt", 'w')
+    for iI in range(iNumP1):
+        aVals[iI]=solveriter.iterate(aPoints[iI], n_agents, valold)[0]
+
+
+    grid.loadNeededPoints(aVals)
+
     for iK in range(refinement_level):
         grid.setSurplusRefinement(fTol, 1, "fds")
         aPoints=grid.getNeededPoints()
-        aVals=np.empty([iNumP1, 1])
-        for iI in range(iNumP1):
+        aVals=np.empty([aPoints.shape[0], 1])
+        for iI in range(aPoints.shape[0]):
             aVals[iI]=solveriter.iterate(aPoints[iI], n_agents, valold)[0]
             v=aVals[iI]*np.ones((1,1))
             to_print=np.hstack((aPoints[iI].reshape(1,n_agents), v))
             np.savetxt(file, to_print, fmt='%2.16f')
+        grid.loadNeededPoints(aVals)
 
     file.close()
-    grid.loadNeededPoints(aVals)
+
 
     f=open("grid_iter.txt", 'w')
     np.savetxt(f, aPoints, fmt='% 2.16f')
