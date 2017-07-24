@@ -14,19 +14,20 @@ from parameters import *
 #======================================================================
 # Routine to plot sparse grid solutions
 def plot_routine(n_agents, grid, dim, num_points):
-    f=open("forplot.txt", 'w')
-    k_points=0.5*(k_bar + k_up)*np.ones((num_points, n_agents))
+    for i in range(len(theta)):
+        f=open("forplot" + str(i) + ".txt", 'w')
+        k_points=0.5*(k_bar + k_up)*np.ones((num_points, n_agents))
 
-    k_dim=np.linspace(k_bar, k_up, num_points)
+        k_dim=np.linspace(k_bar, k_up, num_points)
 
-    k_points[:,[dim]]=k_dim.reshape(num_points,1)
+        k_points[:,[dim]]=k_dim.reshape(num_points,1)
 
-    vals=grid.evaluateBatch(k_points)
+        vals=grid[str(i)].evaluateBatch(k_points)
 
-    to_print=np.hstack((k_points, vals))
-    np.savetxt(f, to_print, fmt= '% 2.5f')
+        to_print=np.hstack((k_points, vals))
+        np.savetxt(f, to_print, fmt= '% 2.5f')
 
-    f.close()
+        f.close()
     return
 
 #======================================================================

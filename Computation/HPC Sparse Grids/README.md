@@ -1,0 +1,1 @@
+All of these files here are designed to be placed in the same named folder from the [main repository](https://github.com/sischei/OSM_Lab/tree/master/SparseGrid) by Simon Scheidegger for the HPC and Sparse Grids portion of the OSM Lab 2017.
