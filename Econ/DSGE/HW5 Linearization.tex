@@ -197,4 +197,29 @@
     \end{figure}
     
     \subsection*{Exercise 10}
+    In the OLG model with no labor supply, we note that given capital stocks for each group, we can back out the interest rate and wage rate from the firm FOC's, and the household consumption from the household budget constraint. 
+    
+    Therefore, we note that we can define $\Gamma(K_{t+2}, K_{t+1}, K_t, Z_{t+1}, Z_t)$ as the vector function yielding
+    \begin{align*}
+    \Gamma_1 = c_{1,t}^{-\sigma} /(\beta c_{2,t+1}^{-\sigma} (1 - r_{t+1} - \delta)) - 1
+    \Gamma_2 = c_{2,t}^{-\sigma} /(\beta c_{3,t+1}^{-\sigma} (1 - r_{t+1} - \delta)) - 1
+    \end{align*}
+    We present the solution to the OLG model in the attached python notebook. We conclude that the accuracy of TPI is superior, but it also takes a longer time to compute compared to our linearization methods. 
+    
+    \begin{figure}[!h]
+    	\centering
+    	\caption{Comparison of Time Paths for TPI and Linearization}
+    	\includegraphics[scale = 0.5]{fig7}
+    \end{figure}
+    
+    \newpage
+    \subsection*{Exercise 11}
+    Given the code from Exercise 10, we can easily simulate our model to replicate the same path and confidence bands given a stochastic shock.
+    
+    \begin{figure}[!h]
+    	\centering
+    	\caption{Time Series and Confidence Bands from OLG Model}
+    	\includegraphics[scale = 0.5]{fig8}
+    \end{figure}
+ 
 \end{document}

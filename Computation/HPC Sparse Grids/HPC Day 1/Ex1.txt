@@ -1,0 +1,1 @@
+Maximum is 71.6 times speedup.
