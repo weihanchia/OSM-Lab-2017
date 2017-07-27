@@ -1,11 +1,11 @@
 #!/bin/bash
 # a sample job submission script to submit an MPI job to the sandyb partition on Midway1
 
-# set the job name to pi
-#SBATCH --job-name=pi
+# set the job name to Growth Model
+#SBATCH --job-name=growth_model
 
-# send output to pi.out
-#SBATCH --output=pi.out
+# send output to gm.out
+#SBATCH --output=gm.out
 
 # receive an email when job starts, ends, and fails
 #SBATCH --mail-type=BEGIN,END,DAIL
