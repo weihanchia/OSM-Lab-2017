@@ -1,6 +1,6 @@
 #######################################################################
 
-all: normalize_vec.exec dot_prod.exec parallel_pi.exec
+all: normalize_vec.exec dot_prod.exec parallel_pi.exec serial_pi.exec
 
 #######################################################################
 
@@ -15,7 +15,10 @@ dot_prod.exec : dot_prod.cpp
 
 ## Exercise 3
 parallel_pi.exec : parallel_pi.cpp
-	g++ parallel_pi.cpp -fopenmp -o parallel_pi.exec
+	g++ -std=c++0x parallel_pi.cpp -fopenmp -o parallel_pi.exec
 
+## Exercise 3
+serial_pi.exec : serial_pi.cpp
+	g++ serial_pi.cpp -fopenmp -o serial_pi.exec
 clean :
 	rm -f *.exec

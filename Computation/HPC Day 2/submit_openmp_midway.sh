@@ -3,11 +3,11 @@
 # partition on Midway1 please change the --partition option if you want to use
 # another partition on Midway1
 
-# set the job name to hello-openmp
-#SBATCH --job-name=hello-openmp
+# set the job name to exercises
+#SBATCH --job-name=exercises
 
-# send output to hello-openmp.out
-#SBATCH --output=hello-openmp.out
+# send output to exercises.out
+#SBATCH --output=exercises.out
 
 # this job requests node
 #SBATCH --ntasks=1
@@ -26,4 +26,4 @@ export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 # Run the process with mpirun. Notice -n is not required. mpirun will
 # automatically figure out how many processes to run from the slurm options
 ### openmp executable
-./normalize_vec.exec
+./parallel_pi.exec

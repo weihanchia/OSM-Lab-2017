@@ -51,30 +51,35 @@ MatrixXd ValIt(MatrixXd ValOld) {
      These policies and new values will then be part of our new value and policy function guesses.
      */
 
-    for (int itheta=0; itheta<ntheta; itheta++) {
 
-        /*
-         Given the theta state, we now determine the new values and optimal policies corresponding to each
-         capital state.
-         */
-        for (int ik=0; ik<nk; ik++) {
+     for (int itheta=0; itheta<ntheta; itheta++) {
 
-          // Compute the consumption quantities implied by each policy choice
-          c=f(kgrid(ik), thetagrid(itheta))-kgrid;
+         /*
+          Given the theta state, we now determine the new values and optimal policies corresponding to each
+          capital state.
+          */
+          #pragma omp parallel shared(ValNew, Policy, kgrid, thetagrid) private(c, temp)
+          {
+            #pragma omp for
+            for (int ik=0; ik<nk; ik++) {
 
-          // Compute the list of values implied implied by each policy choice
-          temp=util(c) + beta*ValOld*p(thetagrid(itheta));
+             // Compute the consumption quantities implied by each policy choice
+             c=f(kgrid(ik), thetagrid(itheta))-kgrid;
 
-          /* Take the max of temp and store its location.
-           The max is the new value corresponding to (ik, itheta).
-           The location corresponds to the index of the optimal policy choice in kgrid.
-           */
-          ValNew(ik, itheta)=temp.maxCoeff(&maxIndex);
+             // Compute the list of values implied implied by each policy choice
+             temp=util(c) + beta*ValOld*p(thetagrid(itheta));
 
-          Policy(ik, itheta)=kgrid(maxIndex);
-        }
-    }
+             /* Take the max of temp and store its location.
+              The max is the new value corresponding to (ik, itheta).
+              The location corresponds to the index of the optimal policy choice in kgrid.
+              */
+             #pragma omp critical
+             ValNew(ik, itheta)=temp.maxCoeff(&maxIndex);
 
+             Policy(ik, itheta)=kgrid(maxIndex);
+           }
+         }
+     }
     // Concatenate ValNew and Policy into a single (2nk x ntheta) matrix.
     MatrixXd result(2*nk, ntheta);
 
